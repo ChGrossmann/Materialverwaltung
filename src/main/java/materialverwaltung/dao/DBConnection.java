@@ -10,5 +10,5 @@ package materialverwaltung.dao;
  * @author tbaec
  */
 public class DBConnection {
-    vgrvgrvgr
+    String aa = "test";
 }
