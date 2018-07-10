@@ -10,5 +10,8 @@ package materialverwaltung.dao;
  * @author tbaec
  */
 public class DBConnection {
+    public static void main(String[] args) {
+        
+    }
     String aa = "test";
 }

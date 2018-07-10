@@ -24,20 +24,27 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
         
+        // Das Ausgewählte Layout für die Elemente
+        final VerticalLayout rootLayout = new VerticalLayout();
+        
+        // Ein Textfeld zum einfügen
         final TextField name = new TextField();
         name.setCaption("Type your name here:");
 
+        // Ein Button
         Button button = new Button("Click Me");
         button.addClickListener(e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
+            rootLayout.addComponent(new Label("Thanks " + name.getValue() 
                     + ", it works!"));
         });
         
-        layout.addComponents(name, button);
+        // Hier werden die Erstellten Kompnenten eingefügt.
+        rootLayout.addComponents(name, button);
         
-        setContent(layout);
+        
+        // Setzt den zuvor eingefügten Content
+        setContent(rootLayout);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
