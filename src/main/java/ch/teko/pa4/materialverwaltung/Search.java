@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package materialverwaltung.dao;
+package ch.teko.pa4.materialverwaltung;
 
 /**
  *
  * @author tbaec
  */
-public class DBConnection {
-    public static void main(String[] args) {
-        
-    }
-    String aa = "test";
+public class Search {
+    
 }

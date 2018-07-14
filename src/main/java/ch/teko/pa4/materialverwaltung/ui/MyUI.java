@@ -1,4 +1,4 @@
-package pa4.materialverwaltung;
+package ch.teko.pa4.materialverwaltung.ui;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -7,8 +7,9 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
+import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -28,25 +29,40 @@ public class MyUI extends UI {
         // Das Ausgewählte Layout für die Elemente
         final VerticalLayout rootLayout = new VerticalLayout();
         
-        // Ein Textfeld zum einfügen
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
-
-        // Ein Button
-        Button button = new Button("Click Me");
-        button.addClickListener(e -> {
-            rootLayout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
-        });
+        final HorizontalLayout titleLayout = new HorizontalLayout();
+        
+        Label titelLab = new Label("Materialverwaltung");
+        
+        Button loginBtn = new Button("Login");
+        
+        titleLayout.addComponents(titelLab, loginBtn);
+        
+        
+        TabSheet tabsheet = new TabSheet();
+        
+        
+        
+        tabsheet.addTab(new SearchTab().searchTab(), "Search");
+        tabsheet.addTab(new AddTab().addTab(), "Add");
+        tabsheet.addTab(new DeleteTab().deleteLayout, "Delete");
+        tabsheet.addTab(new PrintTab().printLayout, "Print");
+        
+        
+       
         
         // Hier werden die Erstellten Kompnenten eingefügt.
-        rootLayout.addComponents(name, button);
+        rootLayout.addComponents(titleLayout, tabsheet);
         
         
         // Setzt den zuvor eingefügten Content
         setContent(rootLayout);
     }
 
+    
+    
+    
+    
+    
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {

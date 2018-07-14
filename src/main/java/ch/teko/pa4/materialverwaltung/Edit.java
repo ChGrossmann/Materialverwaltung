@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package materialverwaltung.beans;
+package ch.teko.pa4.materialverwaltung;
 
 /**
  *
  * @author tbaec
  */
-public class Material {
+public class Edit {
     
 }

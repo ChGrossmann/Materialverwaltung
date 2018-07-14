@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package materialverwaltung;
+package ch.teko.pa4.materialverwaltung.dao;
 
 /**
  *
  * @author tbaec
  */
-public class Edit {
+public class DBConnection {
     
 }
