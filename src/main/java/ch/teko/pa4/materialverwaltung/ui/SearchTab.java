@@ -50,6 +50,7 @@ public class SearchTab {
 
         Grid<Article> articelGrid = new Grid<>();
         articelGrid.setItems(articleArray);
+        articelGrid.setWidth("1000");
         articelGrid.addColumn(Article::getStation).setCaption("Station");
         articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
         articelGrid.addColumn(Article::getElement).setCaption("Element");

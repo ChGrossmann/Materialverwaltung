@@ -13,12 +13,12 @@ public class Article {
     
     
     
-    String station;
-    String bezeichnung;
-    String element;
-    String anzahl;
-    String schrank;
-    String tablar;
+    private String station;
+    private String bezeichnung;
+    private String element;
+    private String anzahl;
+    private String schrank;
+    private String tablar;
 
     public Article(String station, String bezeichnung, String element, String anzahl, String schrank, String tablar) {
         this.station = station;

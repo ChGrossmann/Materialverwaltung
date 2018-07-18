@@ -26,7 +26,7 @@ public class AddTab {
     
     final VerticalLayout addLayout = new VerticalLayout();
     
-    final GridLayout addArticleLayout = new GridLayout();
+    final GridLayout addArticleLayout = new GridLayout(2,6);
     
     
     Label stationLab = new Label("Station");
