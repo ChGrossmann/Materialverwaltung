@@ -46,8 +46,6 @@ public class MaterialverwaltungDao {
         
         conn.mdbCollection.insertOne(newArticle);
         
-        
-        
         return newArticle;
     }
     

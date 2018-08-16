@@ -36,7 +36,11 @@ public class Article {
     public Article() {
     }
 
-    public Article(int id, String bahn, String linie, String station, String system1, String system2, String system3, String bezeichnung, String typ, String beschreibung, String artNr, int anzahl, String gestell, int schine, String schrank, int tablar, int box, String bemerkung) {
+    public Article(int id, String bahn, String linie, String station, 
+            String system1, String system2, String system3, String bezeichnung, 
+            String typ, String beschreibung, String artNr, int anzahl, 
+            String gestell, int schine, String schrank, int tablar, int box, 
+            String bemerkung) {
         this.id = id;
         this.bahn = bahn;
         this.linie = linie;

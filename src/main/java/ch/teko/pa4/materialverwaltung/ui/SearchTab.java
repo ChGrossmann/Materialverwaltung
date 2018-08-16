@@ -23,11 +23,7 @@ public class SearchTab {
 
     public Component searchTab() {
 
-        List<Article> articleArray = Arrays.asList(
-                new Article(1, "SBB", "Zürich", "EBI", "rStw", "Domino 67N", "Relaissatz", "WRS", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 1"),
-                new Article(2, "SBB", "Bern", "ENT", "eStw", "SIMIS C", "Karte", "ANRES", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 2"),
-                new Article(2, "SBB", "Seetal", "HIK", "eStw", "Elektra 2", "Karte", "WEB", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 3")
-        );
+        
 
         final VerticalLayout searchLayout = new VerticalLayout();
 
@@ -48,6 +44,20 @@ public class SearchTab {
 
         final VerticalLayout contentLayout = new VerticalLayout();
 
+        
+        List<Article> articleArray = Arrays.asList(
+                new Article(1, "SBB", "Zürich", "EBI", "rStw", "Domino 67N", 
+                        "Relaissatz", "WRS", "501", "Weichenrelaissatz", "34542-89", 
+                        3, "301", 4, ".", 0, 0, "Die Bemerkung 1"),
+                new Article(2, "SBB", "Bern", "ENT", "eStw", "SIMIS C", "Karte", 
+                        "ANRES", "501", "Weichenrelaissatz", "34542-89", 3, "301", 
+                        4, ".", 0, 0, "Die Bemerkung 2"),
+                new Article(2, "SBB", "Seetal", "HIK", "eStw", "Elektra 2", 
+                        "Karte", "WEB", "501", "Weichenrelaissatz", "34542-89", 
+                        3, "301", 4, ".", 0, 0, "Die Bemerkung 3")
+        );
+        
+        
         Grid<Article> articelGrid = new Grid<>();
         articelGrid.setItems(articleArray);
         articelGrid.setWidth("1000");
