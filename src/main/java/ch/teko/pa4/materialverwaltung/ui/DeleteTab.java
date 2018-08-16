@@ -26,9 +26,9 @@ public class DeleteTab {
     public Component deleteTab() {
 
         List<Article> articleArray = Arrays.asList(
-                new Article("LZ", "Sicherung", "C13", "3", "A3", "4"),
-                new Article("GTS", "Sicherung", "C13", "3", "A3", "4"),
-                new Article("EBI", "Sicherung", "C13", "3", "A3", "4")
+                new Article(1, "SBB", "Zürich", "EBI", "rStw", "Domino 67N", "Relaissatz", "WRS", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 1"),
+                new Article(2, "SBB", "Bern", "ENT", "eStw", "SIMIS C", "Karte", "ANRES", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 2"),
+                new Article(2, "SBB", "Seetal", "HIK", "eStw", "Elektra 2", "Karte", "WEB", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 3")
         );
 
         final VerticalLayout deleteLayout = new VerticalLayout();
@@ -55,7 +55,6 @@ public class DeleteTab {
         articelGrid.setWidth("1000");
         articelGrid.addColumn(Article::getStation).setCaption("Station");
         articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
-        articelGrid.addColumn(Article::getElement).setCaption("Element");
         articelGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
         articelGrid.addColumn(Article::getSchrank).setCaption("Schrank");
         articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
