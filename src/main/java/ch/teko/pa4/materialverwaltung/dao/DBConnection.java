@@ -5,10 +5,42 @@
  */
 package ch.teko.pa4.materialverwaltung.dao;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
 /**
  *
  * @author tbaec
  */
 public class DBConnection {
+    
+    public MongoDatabase db;
+    public MongoCollection<Document> mdbCollection;
+    
+    /**
+     * connection erwartet ein Parameter für den Namen der Collection.
+     * @param collection 
+     */
+       public void connection(String collection){
+        // Verbindung zu localhost, Port: 27017
+        MongoClient client = MongoClients.create();
+
+       /**
+        * Die Db rechnung
+        */
+        db = client.getDatabase("Materialverwaltung");
+        
+        /**
+         * Die Collection nach Parameter
+         */
+        mdbCollection = db.getCollection(collection);
+                
+
+        
+
+    }
     
 }
