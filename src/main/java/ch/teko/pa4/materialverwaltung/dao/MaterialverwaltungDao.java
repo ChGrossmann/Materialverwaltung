@@ -5,10 +5,50 @@
  */
 package ch.teko.pa4.materialverwaltung.dao;
 
+import ch.teko.pa4.materialverwaltung.beans.Article;
+import org.bson.Document;
+
 /**
  *
  * @author ch.grossmann
  */
 public class MaterialverwaltungDao {
+    
+    DBConnection conn = new DBConnection();
+    
+    
+    
+    
+    public Document addArticle(Article article){
+        
+        conn.connection("artikel");
+        
+        Document newArticle = new Document();
+        
+        newArticle.append("id", article.getId());
+        newArticle.append("bahn", article.getBahn());
+        newArticle.append("linie", article.getLinie());
+        newArticle.append("station", article.getStation());
+        newArticle.append("system1", article.getSystem1());
+        newArticle.append("system2", article.getSystem2());
+        newArticle.append("system3", article.getSystem3());
+        newArticle.append("bezeichnung", article.getBezeichnung());
+        newArticle.append("typ", article.getTyp());
+        newArticle.append("beschreibung", article.getBeschreibung());
+        newArticle.append("artNr", article.getArtNr());
+        newArticle.append("anzahl", article.getAnzahl());
+        newArticle.append("gestell", article.getGestell());
+        newArticle.append("schiene", article.getSchiene());
+        newArticle.append("schrank", article.getSchrank());
+        newArticle.append("tablar", article.getTablar());
+        newArticle.append("box", article.getBox());
+        newArticle.append("bemerkung", article.getBemerkung());
+        
+        conn.mdbCollection.insertOne(newArticle);
+        
+        
+        
+        return newArticle;
+    }
     
 }

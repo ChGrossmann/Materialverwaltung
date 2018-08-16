@@ -17,8 +17,10 @@ import org.bson.Document;
  */
 public class DBConnection {
     
+   
     public MongoDatabase db;
     public MongoCollection<Document> mdbCollection;
+    
     
     /**
      * connection erwartet ein Parameter für den Namen der Collection.
@@ -29,7 +31,7 @@ public class DBConnection {
         MongoClient client = MongoClients.create();
 
        /**
-        * Die Db rechnung
+        * Die Db Materialverwaltung
         */
         db = client.getDatabase("Materialverwaltung");
         

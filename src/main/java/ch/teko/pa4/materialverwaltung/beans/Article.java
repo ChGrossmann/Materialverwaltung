@@ -25,7 +25,7 @@ public class Article {
     private String artNr;
     private int anzahl;
     private String gestell;
-    private int schine;
+    private int schiene;
     private String schrank;
     private int tablar;
     private int box;
@@ -50,7 +50,7 @@ public class Article {
         this.artNr = artNr;
         this.anzahl = anzahl;
         this.gestell = gestell;
-        this.schine = schine;
+        this.schiene = schine;
         this.schrank = schrank;
         this.tablar = tablar;
         this.box = box;
@@ -168,12 +168,12 @@ public class Article {
         this.gestell = gestell;
     }
 
-    public int getSchine() {
-        return schine;
+    public int getSchiene() {
+        return schiene;
     }
 
-    public void setSchine(int schine) {
-        this.schine = schine;
+    public void setSchiene(int schine) {
+        this.schiene = schine;
     }
 
     public String getSchrank() {
