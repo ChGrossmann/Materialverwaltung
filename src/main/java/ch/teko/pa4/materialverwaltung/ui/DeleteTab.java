@@ -26,9 +26,9 @@ public class DeleteTab {
     public Component deleteTab() {
 
         List<Article> articleArray = Arrays.asList(
-                new Article(1, "SBB", "Zürich", "EBI", "rStw", "Domino 67N", "Relaissatz", "WRS", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 1"),
-                new Article(2, "SBB", "Bern", "ENT", "eStw", "SIMIS C", "Karte", "ANRES", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 2"),
-                new Article(2, "SBB", "Seetal", "HIK", "eStw", "Elektra 2", "Karte", "WEB", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 3")
+                new Article("SBB", "Zürich", "EBI", "rStw", "Domino 67N", "Relaissatz", "WRS", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 1"),
+                new Article("SBB", "Bern", "ENT", "eStw", "SIMIS C", "Karte", "ANRES", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 2"),
+                new Article("SBB", "Seetal", "HIK", "eStw", "Elektra 2", "Karte", "WEB", "501", "Weichenrelaissatz", "34542-89", 3, "301", 4, ".", 0, 0, "Die Bemerkung 3")
         );
 
         final VerticalLayout deleteLayout = new VerticalLayout();

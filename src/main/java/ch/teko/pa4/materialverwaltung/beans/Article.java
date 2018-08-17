@@ -12,7 +12,6 @@ package ch.teko.pa4.materialverwaltung.beans;
 public class Article {
     
     
-    private int id;
     private String bahn;
     private String linie;
     private String station;
@@ -36,12 +35,12 @@ public class Article {
     public Article() {
     }
 
-    public Article(int id, String bahn, String linie, String station, 
+    public Article(String bahn, String linie, String station, 
             String system1, String system2, String system3, String bezeichnung, 
             String typ, String beschreibung, String artNr, int anzahl, 
             String gestell, int schine, String schrank, int tablar, int box, 
             String bemerkung) {
-        this.id = id;
+        
         this.bahn = bahn;
         this.linie = linie;
         this.station = station;
@@ -68,13 +67,7 @@ public class Article {
     
     
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     public String getBahn() {
         return bahn;

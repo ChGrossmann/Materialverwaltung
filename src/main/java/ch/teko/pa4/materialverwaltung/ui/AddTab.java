@@ -31,8 +31,7 @@ public class AddTab {
     final GridLayout addArticleLayout = new GridLayout(2,18);
     
     
-    Label idLab = new Label("id");
-    TextField idTxt = new TextField("");
+    
     Label bahnLab = new Label("Bahn");
     TextField bahnTxt = new TextField("");
     Label linieLab = new Label("Linie");
@@ -70,8 +69,7 @@ public class AddTab {
     
     
     
-    addArticleLayout.addComponent(idLab, 0, 0);
-    addArticleLayout.addComponent(idTxt, 1, 0);
+    
     addArticleLayout.addComponent(bahnLab, 0, 1);
     addArticleLayout.addComponent(bahnTxt, 1, 1);
     addArticleLayout.addComponent(linieLab, 0, 2);
@@ -114,8 +112,7 @@ public class AddTab {
     Button addBtn= new Button("Add", (addArticleEvent) -> {
       Article addArticle = new Article();
       MaterialverwaltungDao dao = new MaterialverwaltungDao();
-      
-      addArticle.setId( Integer.parseInt(idTxt.getValue()));  
+       
       addArticle.setBahn(bahnTxt.getValue());  ;
       addArticle.setLinie(linieTxt.getValue());  ;
       addArticle.setStation(stationTxt.getValue())  ;
