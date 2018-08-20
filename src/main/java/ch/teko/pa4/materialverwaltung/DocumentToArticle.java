@@ -14,35 +14,30 @@ import org.bson.Document;
  * @author ch.grossmann
  */
 public class DocumentToArticle {
-    
-    public Article documentToBill(Document doc){
-    //Bean Bill abfüllen
+
+    public Article documentToAticle(Document doc) {
+        //Bean Bill abfüllen
         Article article = new Article();
-        
-        article.setBahn(doc.get("bemerkung").toString());
-        article.setLinie(doc.get("bemerkung").toString());
-        article.setStation(doc.get("bemerkung").toString());
-        article.setSystem1(doc.get("bemerkung").toString());
-        article.setSystem2(doc.get("bemerkung").toString());
-        article.setSystem3(doc.get("bemerkung").toString());
-        article.setBezeichnung(doc.get("bemerkung").toString());
-        article.setTyp(doc.get("bemerkung").toString());
-        article.setBeschreibung(doc.get("bemerkung").toString());
-        article.setArtNr(doc.get("bemerkung").toString());
-        article.setAnzahl(doc.getInteger("rechnungsnummer"));
-        article.setGestell(doc.get("bemerkung").toString());
-        article.setSchiene(doc.getInteger("rechnungsnummer"));
-        article.setSchrank(doc.get("bemerkung").toString());
-        article.setTablar(doc.getInteger("rechnungsnummer"));
-        article.setBox(doc.getInteger("rechnungsnummer"));
+
+        article.setBahn(doc.get("bahn").toString());
+        article.setLinie(doc.get("linie").toString());
+        article.setStation(doc.get("station").toString());
+        article.setSystem1(doc.get("system1").toString());
+        article.setSystem2(doc.get("system2").toString());
+        article.setSystem3(doc.get("system3").toString());
+        article.setBezeichnung(doc.get("bezeichnung").toString());
+        article.setTyp(doc.get("typ").toString());
+        article.setBeschreibung(doc.get("beschreibung").toString());
+        article.setArtNr(doc.get("artNr").toString());
+        article.setAnzahl(doc.getInteger("anzahl"));
+        article.setGestell(doc.get("gestell").toString());
+        article.setSchiene(doc.getInteger("schiene"));
+        article.setSchrank(doc.get("schrank").toString());
+        article.setTablar(doc.getInteger("tablar"));
+        article.setBox(doc.getInteger("box"));
         article.setBemerkung(doc.get("bemerkung").toString());
 
-        
-
-        
-        
-        
         return article;
     }
-    
+
 }

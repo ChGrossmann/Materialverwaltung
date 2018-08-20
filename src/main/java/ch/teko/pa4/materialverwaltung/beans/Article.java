@@ -10,8 +10,7 @@ package ch.teko.pa4.materialverwaltung.beans;
  * @author tbaec
  */
 public class Article {
-    
-    
+
     private String bahn;
     private String linie;
     private String station;
@@ -29,18 +28,16 @@ public class Article {
     private int tablar;
     private int box;
     private String bemerkung;
-    
-    
 
     public Article() {
     }
 
-    public Article(String bahn, String linie, String station, 
-            String system1, String system2, String system3, String bezeichnung, 
-            String typ, String beschreibung, String artNr, int anzahl, 
-            String gestell, int schiene, String schrank, int tablar, int box, 
+    public Article(String bahn, String linie, String station,
+            String system1, String system2, String system3, String bezeichnung,
+            String typ, String beschreibung, String artNr, int anzahl,
+            String gestell, int schiene, String schrank, int tablar, int box,
             String bemerkung) {
-        
+
         this.bahn = bahn;
         this.linie = linie;
         this.station = station;
@@ -59,15 +56,6 @@ public class Article {
         this.box = box;
         this.bemerkung = bemerkung;
     }
-
-   
-    
-    
-    
-    
-    
-
-    
 
     public String getBahn() {
         return bahn;
@@ -204,9 +192,5 @@ public class Article {
     public void setBemerkung(String bemerkung) {
         this.bemerkung = bemerkung;
     }
-    
-    
-    
-    
-    
+
 }

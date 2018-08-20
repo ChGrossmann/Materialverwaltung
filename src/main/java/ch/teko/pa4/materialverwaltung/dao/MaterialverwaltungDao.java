@@ -17,21 +17,18 @@ import org.bson.Document;
  * @author ch.grossmann
  */
 public class MaterialverwaltungDao {
-    
+
     DBConnection conn = new DBConnection();
-    
+
     DocumentToArticle DtA = new DocumentToArticle();
     List<Article> searchArticle = new ArrayList<>();
-    
-    
-    
-    
-    public Document addArticle(Article article){
-        
+
+    public Document addArticle(Article article) {
+
         conn.connection("Artikel");
-        
+
         Document newArticle = new Document();
-        
+
         newArticle.append("bahn", article.getBahn());
         newArticle.append("linie", article.getLinie());
         newArticle.append("station", article.getStation());
@@ -49,58 +46,45 @@ public class MaterialverwaltungDao {
         newArticle.append("tablar", article.getTablar());
         newArticle.append("box", article.getBox());
         newArticle.append("bemerkung", article.getBemerkung());
-        
+
         conn.mdbCollection.insertOne(newArticle);
-        
+
         return newArticle;
     }
-    
-    public List<Article> searchArticle(){
-        
-         
+
+    public List<Article> searchArticle() {
+
         conn.connection("Artikel");
-        
-        
-       MongoCursor<Document> listArticle = conn.mdbCollection.find().iterator();
-        
-       
-           while(listArticle.hasNext()){
-               Article a = DtA.documentToBill(listArticle.next());
-               
-               searchArticle.add(a);
-               
-           }
-       
-        
-       
-        
-        return searchArticle;
-    }
-    
-    public List<Article> searchArticle(Document artikel){
-        
-         
-         
-        conn.connection("Artikel");
-        
-        
-       MongoCursor<Document> listArticle = conn.mdbCollection.find(artikel).iterator();
-        
-       
-           while(listArticle.hasNext()){
-               Article a = DtA.documentToBill(listArticle.next());
-               
-               searchArticle.add(a);
-               
-           }
-       
-        
-       
-        
+
+        MongoCursor<Document> listArticle = conn.mdbCollection.find().iterator();
+
+        while (listArticle.hasNext()) {
+
+            Article a = DtA.documentToAticle(listArticle.next());
+
+            searchArticle.add(a);
+
+        }
+
         return searchArticle;
     }
 
-   
+    public List<Article> searchArticle(Document artikel) {
+
+        conn.connection("Artikel");
+
+        MongoCursor<Document> listArticle = conn.mdbCollection.find(artikel).iterator();
+
+        while (listArticle.hasNext()) {
+            Article a = DtA.documentToAticle(listArticle.next());
+
+            searchArticle.add(a);
+
+        }
+
+        return searchArticle;
+    }
+
 //   Rechnungen rechnung;
 //        List<Rechnungen> rechnungen = new ArrayList<>();        
 //
@@ -121,5 +105,4 @@ public class MaterialverwaltungDao {
 //        try {
 //            while (cursor.hasNext()) {
 //                Document d = cursor.next();
-    
 }
