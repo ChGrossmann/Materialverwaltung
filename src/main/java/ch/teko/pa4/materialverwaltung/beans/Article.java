@@ -38,7 +38,7 @@ public class Article {
     public Article(String bahn, String linie, String station, 
             String system1, String system2, String system3, String bezeichnung, 
             String typ, String beschreibung, String artNr, int anzahl, 
-            String gestell, int schine, String schrank, int tablar, int box, 
+            String gestell, int schiene, String schrank, int tablar, int box, 
             String bemerkung) {
         
         this.bahn = bahn;
@@ -53,7 +53,7 @@ public class Article {
         this.artNr = artNr;
         this.anzahl = anzahl;
         this.gestell = gestell;
-        this.schiene = schine;
+        this.schiene = schiene;
         this.schrank = schrank;
         this.tablar = tablar;
         this.box = box;

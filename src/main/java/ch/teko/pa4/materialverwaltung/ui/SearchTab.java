@@ -23,6 +23,10 @@ import org.bson.Document;
  * @author ch.grossmann
  */
 public class SearchTab {
+    
+    List<Article> searchArticleList = new ArrayList<>();
+    
+    private String column;
 
     public Component searchTab() {
 
@@ -32,10 +36,23 @@ public class SearchTab {
         final VerticalLayout searchLayout = new VerticalLayout();
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
+        final VerticalLayout contentLayout = new VerticalLayout();
 
-        Button articleBtn = new Button("Article");
-        Button stationBtn = new Button("Station");
-        Button elementBtn = new Button("Bezeichnung");
+        Button articleBtn = new Button("Bezeichnung",(searchEvent) -> {
+            
+            column = "bezeichnung";
+            
+        });
+        Button stationBtn = new Button("Station",(searchEvent) -> {
+            
+            column = "station";
+            
+        });
+        Button elementBtn = new Button("Typ",(searchEvent) -> {
+            
+            column = "typ";
+            
+        });
 
         filterLayout.addComponents(articleBtn, stationBtn, elementBtn);
 
@@ -46,21 +63,49 @@ public class SearchTab {
             
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
             
-            if(searchField != null){
-                Document newSearchDoc = new Document();
+            if(searchField.isEmpty()){
                 
-                newSearchDoc.append(key, this);
+                searchArticleList = dao.searchArticle();
+                
             }else{
                 
-               List<Article> searchArticleList = new ArrayList<>();
-               searchArticleList = dao.searchArticle();
+               Document newSearchDoc = new Document();
+                
+                newSearchDoc.append(column, searchField);
+                
+                searchArticleList = dao.searchArticle(newSearchDoc);
                 
             }
+            
+            Grid<Article> articelGrid = new Grid<>();
+        articelGrid.setItems(searchArticleList);
+        articelGrid.setWidth("1500");
+        articelGrid.addColumn(Article::getBahn).setCaption("Bahn");
+        articelGrid.addColumn(Article::getLinie).setCaption("Linie");
+        articelGrid.addColumn(Article::getStation).setCaption("Station");
+        articelGrid.addColumn(Article::getSystem1).setCaption("System 1");
+        articelGrid.addColumn(Article::getSystem2).setCaption("System 2");
+        articelGrid.addColumn(Article::getSystem3).setCaption("System 3");
+        articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
+        articelGrid.addColumn(Article::getTyp).setCaption("Typ");
+        articelGrid.addColumn(Article::getBeschreibung).setCaption("Beschreibung");
+        articelGrid.addColumn(Article::getArtNr).setCaption("Artikelnr.");
+        articelGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
+        articelGrid.addColumn(Article::getGestell).setCaption("Gestell");
+        articelGrid.addColumn(Article::getSchiene).setCaption("Schiene");
+        articelGrid.addColumn(Article::getSchrank).setCaption("Schrank");
+        articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
+        articelGrid.addColumn(Article::getBox).setCaption("Box");
+        articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
+
+        contentLayout.addComponents(articelGrid);
+            
+            
         });
 
         textLayout.addComponents(searchField, searchBtn);
 
-        final VerticalLayout contentLayout = new VerticalLayout();
+        
 
         
 //        List<Article> articleArray = Arrays.asList(
@@ -76,17 +121,7 @@ public class SearchTab {
 //        );
         
         
-        Grid<Article> articelGrid = new Grid<>();
-        articelGrid.setItems(searchArticleList);
-        articelGrid.setWidth("1000");
-        articelGrid.addColumn(Article::getStation).setCaption("Station");
-        articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
-        articelGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
-        articelGrid.addColumn(Article::getSchrank).setCaption("Schrank");
-        articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
         
-
-        contentLayout.addComponents(articelGrid);
 
         searchLayout.addComponents(filterLayout, textLayout, contentLayout);
 

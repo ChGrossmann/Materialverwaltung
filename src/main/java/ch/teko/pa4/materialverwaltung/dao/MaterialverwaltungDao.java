@@ -5,7 +5,9 @@
  */
 package ch.teko.pa4.materialverwaltung.dao;
 
+import ch.teko.pa4.materialverwaltung.DocumentToArticle;
 import ch.teko.pa4.materialverwaltung.beans.Article;
+import com.mongodb.client.MongoCursor;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -17,6 +19,9 @@ import org.bson.Document;
 public class MaterialverwaltungDao {
     
     DBConnection conn = new DBConnection();
+    
+    DocumentToArticle DtA = new DocumentToArticle();
+    List<Article> searchArticle = new ArrayList<>();
     
     
     
@@ -52,70 +57,69 @@ public class MaterialverwaltungDao {
     
     public List<Article> searchArticle(){
         
+         
         conn.connection("Artikel");
         
         
+       MongoCursor<Document> listArticle = conn.mdbCollection.find().iterator();
         
+       
+           while(listArticle.hasNext()){
+               Article a = DtA.documentToBill(listArticle.next());
+               
+               searchArticle.add(a);
+               
+           }
+       
         
-        List<Document> listBill = conn.mdbCollection.find().into(new ArrayList<Document>());
-        
-        
-        
-        
-        
-        List<Article> searchArticle = new ArrayList<Article>();
+       
         
         return searchArticle;
     }
     
-    public List<Article> searchArticle(String article){
+    public List<Article> searchArticle(Document artikel){
         
+         
+         
         conn.connection("Artikel");
         
-        Document searchArticleDoc = new Document();
         
+       MongoCursor<Document> listArticle = conn.mdbCollection.find(artikel).iterator();
         
-        List<Document> listBill = conn.mdbCollection.find().into(new ArrayList<Document>());
+       
+           while(listArticle.hasNext()){
+               Article a = DtA.documentToBill(listArticle.next());
+               
+               searchArticle.add(a);
+               
+           }
+       
         
-        
-        
-        
-        
-        List<Article> searchArticle = new ArrayList<Article>();
+       
         
         return searchArticle;
     }
-    
-       /**
-    * Die Methode um alle(20) Rechnungen aud der Datenbank zu lesen und in eine ArrayList zu schreiben.
-    * @return 
-    */
-   public List<Document> searchBill(){
-       
-       conn.connection("bill");
-       
-       
-       List<Document> listBill = conn.mdbCollection.find().into(new ArrayList<Document>());
-       
-       
-       return listBill;
-   }
+
    
-   /**
-    * Die Methode um nach einer Rechnungsnummer zu suchen.
-    * @param billNr
-    * @return 
-    */
-   public List<Document> searchBillNr(int billNr){
-       
-       conn.connection("bill");
-       
-       Document filter = new Document("rechnungsnummer", billNr);
-       
-       List<Document> bill = conn.mdbCollection.find(filter).into(new ArrayList<Document>());
-       
-       
-       return bill;
-   }
+//   Rechnungen rechnung;
+//        List<Rechnungen> rechnungen = new ArrayList<>();        
+//
+//        MongoClient client = MongoClients.create();
+//        MongoDatabase db = client.getDatabase("PowerofSeeds");
+//        MongoCollection<Document> collection = db.getCollection("rechnungen");
+//        
+//        BasicDBObject MongoQuery = new BasicDBObject();
+//        MongoCursor<Document> cursor;
+//        
+//        if (searchString.isEmpty()) {
+//            cursor = collection.find().iterator();
+//        } else {
+//            MongoQuery.put("nummer", Integer.parseInt(searchString));         
+//            cursor = collection.find(MongoQuery).iterator();
+//        }
+//        
+//        try {
+//            while (cursor.hasNext()) {
+//                Document d = cursor.next();
     
 }
