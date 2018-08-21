@@ -7,11 +7,13 @@ package ch.teko.pa4.materialverwaltung.ui;
 
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -122,7 +124,30 @@ public class AddTab {
             addArticle.setBemerkung(bemerkungTxt.getValue());;
 
             dao.addArticle(addArticle);
+            
+            Notification notif = new Notification("Artikel wurde hinzugefügt.");
+            notif.setDelayMsec(2000);
+            notif.show(Page.getCurrent());
 
+            
+            bahnTxt.clear();
+            linieTxt.clear();
+            stationTxt.clear();
+            system1Txt.clear();
+            system2Txt.clear();
+            system3Txt.clear();
+            bezeichnungTxt.clear();
+            typTxt.clear();
+            beschreibungTxt.clear();
+            artikelNrTxt.clear();
+            anzahlTxt.clear();
+            gestellTxt.clear();
+            schieneTxt.clear();
+            schrankTxt.clear();
+            tablarTxt.clear();
+            boxTxt.clear();
+            bemerkungTxt.clear();
+            
         });
 
         submitLayout.addComponent(addBtn);

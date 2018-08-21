@@ -85,24 +85,5 @@ public class MaterialverwaltungDao {
         return searchArticle;
     }
 
-//   Rechnungen rechnung;
-//        List<Rechnungen> rechnungen = new ArrayList<>();        
-//
-//        MongoClient client = MongoClients.create();
-//        MongoDatabase db = client.getDatabase("PowerofSeeds");
-//        MongoCollection<Document> collection = db.getCollection("rechnungen");
-//        
-//        BasicDBObject MongoQuery = new BasicDBObject();
-//        MongoCursor<Document> cursor;
-//        
-//        if (searchString.isEmpty()) {
-//            cursor = collection.find().iterator();
-//        } else {
-//            MongoQuery.put("nummer", Integer.parseInt(searchString));         
-//            cursor = collection.find(MongoQuery).iterator();
-//        }
-//        
-//        try {
-//            while (cursor.hasNext()) {
-//                Document d = cursor.next();
+
 }

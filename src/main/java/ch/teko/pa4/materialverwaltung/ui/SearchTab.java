@@ -7,14 +7,15 @@ package ch.teko.pa4.materialverwaltung.ui;
 
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.bson.Document;
 
@@ -34,32 +35,59 @@ public class SearchTab {
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
         final VerticalLayout contentLayout = new VerticalLayout();
+        
+        Button linieBtn = new Button("Linie", (searchEvent) -> {
 
-        Button articleBtn = new Button("Bezeichnung", (searchEvent) -> {
-
-            column = "bezeichnung";
+            column = "linie";
 
         });
+        
         Button stationBtn = new Button("Station", (searchEvent) -> {
 
             column = "station";
 
         });
-        Button elementBtn = new Button("Typ", (searchEvent) -> {
+
+        Button bezeichnungBtn = new Button("Bezeichnung", (searchEvent) -> {
+
+            column = "bezeichnung";
+
+        });
+        
+        Button typBtn = new Button("Typ", (searchEvent) -> {
 
             column = "typ";
 
         });
+        
+        
+        Button beschreibungBtn = new Button("Beschreibung", (searchEvent) -> {
 
-        filterLayout.addComponents(articleBtn, stationBtn, elementBtn);
+            column = "beschreibung";
+
+        });
+        Button artNrBtn = new Button("Artikelnummer", (searchEvent) -> {
+
+            column = "artNr";
+
+        });
+
+        filterLayout.addComponents(linieBtn, stationBtn, bezeichnungBtn, typBtn, beschreibungBtn, artNrBtn);
 
         final HorizontalLayout textLayout = new HorizontalLayout();
+        
+        
 
-        TextField searchField = new TextField("Searchtext");
-        Button searchBtn = new Button("Search", (searchEvent) -> {
-
-            Grid<Article> articelGrid = new Grid<>();
-            contentLayout.removeComponent(articelGrid);
+        TextField searchField = new TextField("Suchtext");
+        Button searchBtn = new Button("Suchen", (searchEvent) -> {
+            
+            /**
+             * Das löscht das vorhergehende articleGrid
+             */
+            if(contentLayout.getComponentCount() != 0){
+                contentLayout.removeAllComponents();
+            }
+            
 
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
@@ -71,12 +99,18 @@ public class SearchTab {
 
                 Document newSearchDoc = new Document();
 
-                newSearchDoc.append(column, searchField);
+                newSearchDoc.append(column, searchField.getValue());
 
                 searchArticleList = dao.searchArticle(newSearchDoc);
 
             }
 
+            if(searchArticleList.isEmpty()){
+                Notification notif = new Notification("Es wurde kein entsprechender Artikel gefunden.");
+                notif.setDelayMsec(3000);
+                notif.show(Page.getCurrent());
+            }
+            Grid<Article> articelGrid = new Grid<>();
             articelGrid.setItems(searchArticleList);
             articelGrid.setSizeFull();
             articelGrid.addColumn(Article::getBahn).setCaption("Bahn");
@@ -96,24 +130,19 @@ public class SearchTab {
             articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
             articelGrid.addColumn(Article::getBox).setCaption("Box");
             articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
-
+            
             contentLayout.addComponents(articelGrid);
 
+            
         });
+        
+
+            
+        
 
         textLayout.addComponents(searchField, searchBtn);
 
-//        List<Article> articleArray = Arrays.asList(
-//                new Article("SBB", "Zürich", "EBI", "rStw", "Domino 67N", 
-//                        "Relaissatz", "WRS", "501", "Weichenrelaissatz", "34542-89", 
-//                        3, "301", 4, ".", 0, 0, "Die Bemerkung 1"),
-//                new Article("SBB", "Bern", "ENT", "eStw", "SIMIS C", "Karte", 
-//                        "ANRES", "501", "Weichenrelaissatz", "34542-89", 3, "301", 
-//                        4, ".", 0, 0, "Die Bemerkung 2"),
-//                new Article("SBB", "Seetal", "HIK", "eStw", "Elektra 2", 
-//                        "Karte", "WEB", "501", "Weichenrelaissatz", "34542-89", 
-//                        3, "301", 4, ".", 0, 0, "Die Bemerkung 3")
-//        );
+
         searchLayout.addComponents(filterLayout, textLayout, contentLayout);
 
         return searchLayout;
