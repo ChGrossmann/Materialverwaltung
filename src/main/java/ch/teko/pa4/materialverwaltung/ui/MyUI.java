@@ -42,10 +42,11 @@ public class MyUI extends UI {
         
         
         
-        tabsheet.addTab(new SearchTab().searchTab(), "Search");
-        tabsheet.addTab(new AddTab().addTab(), "Add");
-        tabsheet.addTab(new DeleteTab().deleteTab(), "Delete");
-        tabsheet.addTab(new PrintTab().printLayout, "Print");
+        tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
+        tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
+        tabsheet.addTab(new EditTab().editTab(), "Ändern");
+        tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");
+        tabsheet.addTab(new PrintTab().printLayout, "Drucken");
         
         
        

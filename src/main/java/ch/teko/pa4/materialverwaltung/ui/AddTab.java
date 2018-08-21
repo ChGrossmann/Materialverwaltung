@@ -101,27 +101,27 @@ public class AddTab {
 
         final HorizontalLayout submitLayout = new HorizontalLayout();
 
-        Button addBtn = new Button("Add", (addArticleEvent) -> {
+        Button addBtn = new Button("Hinzufügen", (addArticleEvent) -> {
             Article addArticle = new Article();
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
-            addArticle.setBahn(bahnTxt.getValue());;
-            addArticle.setLinie(linieTxt.getValue());;
+            addArticle.setBahn(bahnTxt.getValue());
+            addArticle.setLinie(linieTxt.getValue());
             addArticle.setStation(stationTxt.getValue());
             addArticle.setSystem1(system1Txt.getValue());
             addArticle.setSystem2(system2Txt.getValue());
-            addArticle.setSystem3(system3Txt.getValue());;
+            addArticle.setSystem3(system3Txt.getValue());
             addArticle.setBezeichnung(bezeichnungTxt.getValue());
-            addArticle.setTyp(typTxt.getValue());;
-            addArticle.setBeschreibung(beschreibungTxt.getValue());;
-            addArticle.setArtNr(artikelNrTxt.getValue());;
-            addArticle.setAnzahl(Integer.parseInt(anzahlTxt.getValue()));;
-            addArticle.setGestell(gestellTxt.getValue());;
-            addArticle.setSchiene(Integer.parseInt(schieneTxt.getValue()));;
-            addArticle.setSchrank(schrankTxt.getValue());;
-            addArticle.setTablar(Integer.parseInt(tablarTxt.getValue()));;
-            addArticle.setBox(Integer.parseInt(boxTxt.getValue()));;
-            addArticle.setBemerkung(bemerkungTxt.getValue());;
+            addArticle.setTyp(typTxt.getValue());
+            addArticle.setBeschreibung(beschreibungTxt.getValue());
+            addArticle.setArtNr(artikelNrTxt.getValue());
+            addArticle.setAnzahl(Integer.parseInt(anzahlTxt.getValue()));
+            addArticle.setGestell(gestellTxt.getValue());
+            addArticle.setSchiene(Integer.parseInt(schieneTxt.getValue()));
+            addArticle.setSchrank(schrankTxt.getValue());
+            addArticle.setTablar(Integer.parseInt(tablarTxt.getValue()));
+            addArticle.setBox(Integer.parseInt(boxTxt.getValue()));
+            addArticle.setBemerkung(bemerkungTxt.getValue());
 
             dao.addArticle(addArticle);
             
