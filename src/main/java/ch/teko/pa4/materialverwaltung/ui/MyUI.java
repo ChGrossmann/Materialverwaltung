@@ -25,8 +25,7 @@ import com.vaadin.ui.UI;
  * initialize non-component functionality.
  */
 
-@SuppressWarnings("serial")
-//@Theme("vaadinlogin")
+//@SuppressWarnings("serial")
 @Theme("mytheme")
 public class MyUI extends UI {
 
