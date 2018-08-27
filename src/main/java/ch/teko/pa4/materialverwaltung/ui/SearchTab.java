@@ -7,6 +7,7 @@ package ch.teko.pa4.materialverwaltung.ui;
 
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -34,6 +35,10 @@ public class SearchTab {
         final VerticalLayout searchLayout = new VerticalLayout();
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
+        
+        
+
+        
         final VerticalLayout contentLayout = new VerticalLayout();
         
         Button linieBtn = new Button("Linie", (searchEvent) -> {
@@ -112,7 +117,8 @@ public class SearchTab {
             }
             Grid<Article> articelGrid = new Grid<>();
             articelGrid.setItems(searchArticleList);
-            articelGrid.setSizeFull();
+            articelGrid.setWidth("100%");
+            articelGrid.setHeight("100%");
             articelGrid.addColumn(Article::getBahn).setCaption("Bahn");
             articelGrid.addColumn(Article::getLinie).setCaption("Linie");
             articelGrid.addColumn(Article::getStation).setCaption("Station");
@@ -143,7 +149,9 @@ public class SearchTab {
 
         textLayout.addComponents(searchField, searchBtn);
 
-
+        filterLayout.setSizeUndefined();
+        filterLayout.addStyleName("filterBorder");
+        
         searchLayout.addComponents(filterLayout, textLayout, contentLayout);
 
         return searchLayout;
