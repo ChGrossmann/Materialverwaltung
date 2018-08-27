@@ -130,7 +130,8 @@ public class SearchTab {
             articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
             articelGrid.addColumn(Article::getBox).setCaption("Box");
             articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
-            
+
+            contentLayout.setMargin(false);
             contentLayout.addComponents(articelGrid);
 
             
