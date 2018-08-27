@@ -11,7 +11,7 @@ import com.mongodb.client.MongoCursor;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
-
+ 
 /**
  *
  * @author ch.grossmann
@@ -75,6 +75,7 @@ public class MaterialverwaltungDao {
 
         MongoCursor<Document> listArticle = conn.mdbCollection.find(artikel).iterator();
 
+        
         while (listArticle.hasNext()) {
             Article a = DtA.documentToAticle(listArticle.next());
 

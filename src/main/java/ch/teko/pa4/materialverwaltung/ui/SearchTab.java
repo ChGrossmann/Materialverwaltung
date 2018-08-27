@@ -35,13 +35,13 @@ public class SearchTab {
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
         final VerticalLayout contentLayout = new VerticalLayout();
-        
+
         Button linieBtn = new Button("Linie", (searchEvent) -> {
 
             column = "linie";
 
         });
-        
+
         Button stationBtn = new Button("Station", (searchEvent) -> {
 
             column = "station";
@@ -53,14 +53,13 @@ public class SearchTab {
             column = "bezeichnung";
 
         });
-        
+
         Button typBtn = new Button("Typ", (searchEvent) -> {
 
             column = "typ";
 
         });
-        
-        
+
         Button beschreibungBtn = new Button("Beschreibung", (searchEvent) -> {
 
             column = "beschreibung";
@@ -75,19 +74,16 @@ public class SearchTab {
         filterLayout.addComponents(linieBtn, stationBtn, bezeichnungBtn, typBtn, beschreibungBtn, artNrBtn);
 
         final HorizontalLayout textLayout = new HorizontalLayout();
-        
-        
 
         TextField searchField = new TextField("Suchtext");
         Button searchBtn = new Button("Suchen", (searchEvent) -> {
-            
+
             /**
              * Das löscht das vorhergehende articleGrid
              */
-            if(contentLayout.getComponentCount() != 0){
+            if (contentLayout.getComponentCount() != 0) {
                 contentLayout.removeAllComponents();
             }
-            
 
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
@@ -105,47 +101,42 @@ public class SearchTab {
 
             }
 
-            if(searchArticleList.isEmpty()){
+            if (searchArticleList.isEmpty()) {
                 Notification notif = new Notification("Es wurde kein entsprechender Artikel gefunden.");
                 notif.setDelayMsec(3000);
                 notif.show(Page.getCurrent());
             }
-            Grid<Article> articelGrid = new Grid<>();
-            articelGrid.setItems(searchArticleList);
-            articelGrid.setSizeFull();
-            articelGrid.addColumn(Article::getBahn).setCaption("Bahn");
-            articelGrid.addColumn(Article::getLinie).setCaption("Linie");
-            articelGrid.addColumn(Article::getStation).setCaption("Station");
-            articelGrid.addColumn(Article::getSystem1).setCaption("System 1");
-            articelGrid.addColumn(Article::getSystem2).setCaption("System 2");
-            articelGrid.addColumn(Article::getSystem3).setCaption("System 3");
-            articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
-            articelGrid.addColumn(Article::getTyp).setCaption("Typ");
-            articelGrid.addColumn(Article::getBeschreibung).setCaption("Beschreibung");
-            articelGrid.addColumn(Article::getArtNr).setCaption("Artikelnr.");
-            articelGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
-            articelGrid.addColumn(Article::getGestell).setCaption("Gestell");
-            articelGrid.addColumn(Article::getSchiene).setCaption("Schiene");
-            articelGrid.addColumn(Article::getSchrank).setCaption("Schrank");
-            articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
-            articelGrid.addColumn(Article::getBox).setCaption("Box");
-            articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
-
+            Grid<Article> articleGrid = new Grid<>();
+            articleGrid.setItems(searchArticleList);
+            articleGrid.setSizeFull();
+            articleGrid.addColumn(Article::getBahn).setCaption("Bahn");
+            articleGrid.addColumn(Article::getLinie).setCaption("Linie");
+            articleGrid.addColumn(Article::getStation).setCaption("Station");
+            articleGrid.addColumn(Article::getSystem1).setCaption("System 1");
+            articleGrid.addColumn(Article::getSystem2).setCaption("System 2");
+            articleGrid.addColumn(Article::getSystem3).setCaption("System 3");
+            articleGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
+            articleGrid.addColumn(Article::getTyp).setCaption("Typ");
+            articleGrid.addColumn(Article::getBeschreibung).setCaption("Beschreibung");
+            articleGrid.addColumn(Article::getArtNr).setCaption("Artikelnr.");
+            articleGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
+            articleGrid.addColumn(Article::getGestell).setCaption("Gestell");
+            articleGrid.addColumn(Article::getSchiene).setCaption("Schiene");
+            articleGrid.addColumn(Article::getSchrank).setCaption("Schrank");
+            articleGrid.addColumn(Article::getTablar).setCaption("Tablar");
+            articleGrid.addColumn(Article::getBox).setCaption("Box");
+            articleGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
+            articleGrid.addColumn(Article::getBemerkung).setCaption("Leer").setId("Leer");
+            articleGrid.getColumn("Leer").setHidden(true);
             contentLayout.setMargin(false);
-            contentLayout.addComponents(articelGrid);
-
-            
+            contentLayout.addComponents(articleGrid);
         });
-        
-
-            
-        
 
         textLayout.addComponents(searchField, searchBtn);
-
-
         searchLayout.addComponents(filterLayout, textLayout, contentLayout);
 
         return searchLayout;
+        
+
     }
 }
