@@ -35,7 +35,8 @@ public class SearchTab {
         final VerticalLayout searchLayout = new VerticalLayout();
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
-        
+        filterLayout.setSizeUndefined();
+        filterLayout.addStyleName("myborder");
         
 
         

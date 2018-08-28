@@ -42,6 +42,9 @@ public class MyUI extends UI {
         
         
         TabSheet tabsheet = new TabSheet();
+        tabsheet.setWidth("99%");
+        tabsheet.setHeight("99%");
+        tabsheet.setStyleName("myborder");
         
         
         
