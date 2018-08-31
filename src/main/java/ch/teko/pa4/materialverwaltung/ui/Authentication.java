@@ -11,8 +11,8 @@ public class Authentication {
 	private String password;
 	
 	public Authentication() {
-		setUsername("myuser");
-		setPassword("mypass");
+		setUsername("test");
+		setPassword("test");
 	}
 
 	private void setUsername(String username) {

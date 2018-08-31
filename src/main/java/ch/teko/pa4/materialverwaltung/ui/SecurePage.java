@@ -19,47 +19,49 @@ public class SecurePage extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	private Label secure;
 	private Label currentUser;
-	private Button otherSecure;
 	private Button logout;
+        private Button forward;
 	public static final String NAME = "Secure";
 
 	public SecurePage() {
 		
-		otherSecure = new Button("OtherSecure");
-		otherSecure.addClickListener(new ClickListener() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				Page.getCurrent().setUriFragment("!"+OtherSecurePage.NAME);
-			}
-		});
 		
-		logout = new Button("Logout");
+		logout = new Button("Ausloggen");
 		logout.addClickListener(new ClickListener() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void buttonClick(ClickEvent event) {
 				getUI().getNavigator().removeView(SecurePage.NAME);
-				getUI().getNavigator().removeView(OtherSecurePage.NAME);
 				VaadinSession.getCurrent().setAttribute("user", null);
 				Page.getCurrent().setUriFragment("");
+                         
 			}
 		});
+                
+                forward = new Button("Fortsetzen");
+                forward.addClickListener(new ClickListener() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+                                Page.getCurrent().setUriFragment("");
+				Page.getCurrent().reload();                       
+			}
+		});
+                
 		
-		secure = new Label("secure");
+		secure = new Label("Eingeloggt");
 		currentUser = new Label("Current User");
 		addComponent(secure);
 		addComponent(currentUser);
-		addComponent(otherSecure);
 		addComponent(logout);
+                addComponent(forward);
 	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		currentUser.setCaption("Current user : " + VaadinSession.getCurrent().getAttribute("user").toString()); 
-
+		currentUser.setCaption("Aktueller Benutzer : " + VaadinSession.getCurrent().getAttribute("user").toString());                  
 	}
 
 }

@@ -42,11 +42,12 @@ public class LoginPage extends VerticalLayout implements View {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				if(Login.AUTH.authenticate(username.getValue(), password.getValue())){
+				if(MyUI.AUTH.authenticate(username.getValue(), password.getValue())){
 					VaadinSession.getCurrent().setAttribute("user", username.getValue());
 					getUI().getNavigator().addView(SecurePage.NAME, SecurePage.class);
-					getUI().getNavigator().addView(OtherSecurePage.NAME, OtherSecurePage.class);
-					Page.getCurrent().setUriFragment("!"+SecurePage.NAME);
+					Page.getCurrent().setUriFragment("");
+                                        Page.getCurrent().reload();
+                                        //Page.getCurrent().setUriFragment("!"+SecurePage.NAME);
 				}else{
 					Notification.show("Invalid credentials", Notification.Type.ERROR_MESSAGE);
 				}
