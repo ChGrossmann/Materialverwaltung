@@ -18,7 +18,6 @@ public class Authentication {
         setPassword("user");
         setUsernameAdmin("admin");
         setPasswordAdmin("admin");
-
     }
 
     private void setUsername(String username) {
