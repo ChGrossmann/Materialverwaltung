@@ -9,6 +9,7 @@ import ch.teko.pa4.materialverwaltung.beans.Article;
 import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.Page;
+import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
@@ -24,6 +25,7 @@ import org.bson.Document;
  *
  * @author ch.grossmann
  */
+
 public class SearchTab {
 
     List<Article> searchArticleList = new ArrayList<>();
@@ -35,8 +37,8 @@ public class SearchTab {
         final VerticalLayout searchLayout = new VerticalLayout();
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
-        filterLayout.setSizeUndefined();
-        filterLayout.addStyleName("myborder");
+        
+        filterLayout.addStyleName("filterBorder");
         
 
         
@@ -150,8 +152,7 @@ public class SearchTab {
 
         textLayout.addComponents(searchField, searchBtn);
 
-        filterLayout.setSizeUndefined();
-        filterLayout.addStyleName("filterBorder");
+       
         
         searchLayout.addComponents(filterLayout, textLayout, contentLayout);
 

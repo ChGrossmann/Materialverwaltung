@@ -38,14 +38,7 @@ public class MyUI extends UI {
         titleLayout.addComponents(titelLab, loginBtn);
         
         
-        
-        
-        
         TabSheet tabsheet = new TabSheet();
-        tabsheet.setWidth("99%");
-        tabsheet.setHeight("99%");
-        tabsheet.setStyleName("myborder");
-        
         
         
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
