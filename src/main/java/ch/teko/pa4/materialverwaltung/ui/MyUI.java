@@ -25,7 +25,7 @@ import com.vaadin.ui.Button;
  * intended to be overridden to add component to the user interface and
  * initialize non-component functionality.
  */
-//@SuppressWarnings("serial")
+@SuppressWarnings("serial")
 @Theme("mytheme")
 public class MyUI extends UI {
 
