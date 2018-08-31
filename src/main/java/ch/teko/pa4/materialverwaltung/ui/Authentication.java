@@ -9,10 +9,14 @@ public class Authentication {
 	
 	private String username;
 	private String password;
+        private String userfunction;
+
+
 	
 	public Authentication() {
 		setUsername("test");
 		setPassword("test");
+                setUserfunction("test");
 	}
 
 	private void setUsername(String username) {
@@ -30,7 +34,15 @@ public class Authentication {
 	private String getPassword(){
 		return this.password;
 	}
-	
+
+        public String getUserfunction() {
+            return userfunction;
+        }
+
+        public void setUserfunction(String function) {
+            this.userfunction = function;
+        }        
+        
 	public Boolean authenticate(String username, String password){
 		if(username.equals(getUsername()) && password.equals(getPassword())){
 			return true;

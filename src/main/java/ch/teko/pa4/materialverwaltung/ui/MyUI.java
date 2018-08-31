@@ -12,7 +12,6 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
@@ -55,7 +54,7 @@ public class MyUI extends UI {
         //Anmeldung
         if (getSession().getAttribute("user") != null) {
             secure = new Label("");
-            secure.setCaption("Eingeloggter Benutzer: " + VaadinSession.getCurrent().getAttribute("user").toString());
+            secure.setCaption("Eingeloggter Benutzer: " + VaadinSession.getCurrent().getAttribute("user").toString() + ", Funktion: " + VaadinSession.getCurrent().getAttribute("userfunction").toString());
 
             rootLayout.addComponents(titleLayout, secure);
 
@@ -65,7 +64,6 @@ public class MyUI extends UI {
 
                 @Override
                 public void buttonClick(Button.ClickEvent event) {
-                    //getUI().getNavigator().removeView(SecurePage.NAME);
                     VaadinSession.getCurrent().setAttribute("user", null);
                     Page.getCurrent().reload();
                 }
@@ -74,15 +72,19 @@ public class MyUI extends UI {
 
         } else {
             AUTH = new Authentication();
+            VaadinSession.getCurrent().setAttribute("userfunction", "");
             new Navigator(this, this);
             getNavigator().addView(LoginPage.NAME, LoginPage.class);
             getNavigator().setErrorView(LoginPage.class);
         }
 
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
-        tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
-        tabsheet.addTab(new EditTab().editTab(), "Ändern");
-        tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");
+        
+        if (VaadinSession.getCurrent().getAttribute("userfunction").toString() == "admin") {
+            tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
+            tabsheet.addTab(new EditTab().editTab(), "Ändern");
+            tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");
+        }
         tabsheet.addTab(new PrintTab().printLayout, "Drucken");
 
         // Hier werden die Erstellten Kompnenten eingefügt.
