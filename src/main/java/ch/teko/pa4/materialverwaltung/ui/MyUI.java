@@ -45,12 +45,6 @@ public class MyUI extends UI {
         final VerticalLayout rootLayout = new VerticalLayout();
         final HorizontalLayout titleLayout = new HorizontalLayout();
 
-        Label titelLab = new Label("Materialverwaltung");
-
-        titleLayout.addComponents(titelLab);
-
-        TabSheet tabsheet = new TabSheet();
-
         //Anmeldung
         if (getSession().getAttribute("user") != null) {
             secure = new Label("");
@@ -77,7 +71,10 @@ public class MyUI extends UI {
             getNavigator().addView(LoginPage.NAME, LoginPage.class);
             getNavigator().setErrorView(LoginPage.class);
         }
-
+        
+        Label titelLab = new Label("Materialverwaltung");
+        titleLayout.addComponents(titelLab);
+        TabSheet tabsheet = new TabSheet();
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
         
         if (VaadinSession.getCurrent().getAttribute("userfunction").toString() == "Admin") {
