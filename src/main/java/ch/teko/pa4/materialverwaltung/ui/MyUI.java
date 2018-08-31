@@ -80,7 +80,7 @@ public class MyUI extends UI {
 
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
         
-        if (VaadinSession.getCurrent().getAttribute("userfunction").toString() == "admin") {
+        if (VaadinSession.getCurrent().getAttribute("userfunction").toString() == "Admin") {
             tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
             tabsheet.addTab(new EditTab().editTab(), "Ändern");
             tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");

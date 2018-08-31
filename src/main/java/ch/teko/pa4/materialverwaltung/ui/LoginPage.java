@@ -37,7 +37,7 @@ public class LoginPage extends VerticalLayout implements View {
         PasswordField password = new PasswordField("Password");
         content.addComponent(password);
 
-        Button send = new Button("Enter");
+        Button send = new Button("Login");
         send.addClickListener(new ClickListener() {
             private static final long serialVersionUID = 1L;
 
