@@ -58,7 +58,7 @@ public class MyUI extends UI {
 
             rootLayout.addComponents(titleLayout, secure);
 
-            logout = new Button("Ausloggen");
+            logout = new Button("Logout");
             logout.addClickListener(new Button.ClickListener() {
                 private static final long serialVersionUID = 1L;
 
