@@ -48,13 +48,6 @@ public class PrintTab {
 //                Document newSearchDoc = new Document();
 //                searchArticleList = dao.searchArticle();
 
-                //As file
-//                URL loc = this.class.getclassLoader().getResource("250.csv");
-//                File f = new File(loc.getPath());
-//                //As Stream
-//                InputStream loc = this.class.getclassLoader().getResourceAsStream("250.csv");
-//                InputStreamReader in = new InputStreamReader(loc);
-
                 String home = System.getProperty("user.home");
                 String FILE_NAME = home + "/test.pdf";
                 try {
