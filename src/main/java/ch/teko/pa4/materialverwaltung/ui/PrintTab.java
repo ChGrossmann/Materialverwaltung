@@ -66,7 +66,14 @@ public class PrintTab {
                     Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
                     Chunk chunk = new Chunk("Hello World", font);
                     document.add(chunk);
+                    
+                    
                     document.close();
+                    
+                    File myFile = new File(FILE_NAME);
+                    Desktop.getDesktop().open(myFile);
+                    
+                    
 
                     
                     File pdfFile = new File(FILE_NAME);
