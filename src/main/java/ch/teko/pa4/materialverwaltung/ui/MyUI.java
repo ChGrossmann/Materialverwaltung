@@ -13,6 +13,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 
@@ -29,8 +30,8 @@ import com.vaadin.ui.Label;
 @Theme("mytheme")
 public class MyUI extends UI {
 
-    private Label secure;
-    private Button logout;
+    private Label secure = new Label("");
+    private Button logout = new Button("Logout");;
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = MyUI.class)
@@ -47,12 +48,12 @@ public class MyUI extends UI {
 
         //Anmeldung
         if (getSession().getAttribute("user") != null) {
-            secure = new Label("");
-            secure.setCaption("Eingeloggter Benutzer: " + VaadinSession.getCurrent().getAttribute("user").toString() + ", Funktion: " + VaadinSession.getCurrent().getAttribute("userfunction").toString());
+             
+            secure.setCaption("Eingeloggter Benutzer: " + VaadinSession.getCurrent().getAttribute("user").toString().toUpperCase());
 
-            rootLayout.addComponents(titleLayout, secure);
+            
 
-            logout = new Button("Logout");
+             
             logout.addClickListener(new Button.ClickListener() {
                 private static final long serialVersionUID = 1L;
 
@@ -62,7 +63,7 @@ public class MyUI extends UI {
                     Page.getCurrent().reload();
                 }
             });
-            rootLayout.addComponents(titleLayout, logout);
+            
 
         } else {
             AUTH = new Authentication();
@@ -72,8 +73,13 @@ public class MyUI extends UI {
             getNavigator().setErrorView(LoginPage.class);
         }
         
-        Label titelLab = new Label("Materialverwaltung");
-        titleLayout.addComponents(titelLab);
+        Label titleLab = new Label("Materialverwaltung");
+        titleLab.setStyleName("title");
+        titleLayout.setSizeFull();
+        titleLayout.addComponents(titleLab, secure, logout);
+        titleLayout.setComponentAlignment(titleLab, Alignment.TOP_LEFT);
+        titleLayout.setComponentAlignment(secure, Alignment.TOP_RIGHT);
+        titleLayout.setComponentAlignment(logout, Alignment.BOTTOM_RIGHT);
         TabSheet tabsheet = new TabSheet();
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
         

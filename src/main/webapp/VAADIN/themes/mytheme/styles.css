@@ -1635,6 +1635,12 @@ div.v-layout.v-horizontal.v-widget {
 	border: 1px solid lightsteelblue;
 }
 
+.mytheme .title {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 30px;
+	font-weight: bold;
+}
+
 .mytheme.v-app, .mytheme.v-app-loading {
 	font: 300 16px/1.55 "Open Sans", sans-serif;
 	color: #464646;

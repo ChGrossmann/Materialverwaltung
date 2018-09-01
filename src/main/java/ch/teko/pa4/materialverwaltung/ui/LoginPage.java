@@ -6,6 +6,8 @@
 package ch.teko.pa4.materialverwaltung.ui;
 
 
+import com.vaadin.event.ShortcutAction;
+import com.vaadin.event.ShortcutListener;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
@@ -43,17 +45,22 @@ public class LoginPage extends VerticalLayout implements View {
 
             @Override
             public void buttonClick(ClickEvent event) {
-                if (MyUI.AUTH.authenticate(username.getValue(), password.getValue())) {
-                    VaadinSession.getCurrent().setAttribute("user", username.getValue());
-                    VaadinSession.getCurrent().setAttribute("userfunction", MyUI.AUTH.getUserfunction());
-                    Page.getCurrent().setUriFragment("");
-                    Page.getCurrent().reload();
-                } else {
-                    Notification.show("Invalid credentials", Notification.Type.ERROR_MESSAGE);
-                }
+                loginAction(username.getValue(), password.getValue());
             }
 
         });
+        
+        ShortcutListener shortcut = new ShortcutListener("Login", ShortcutAction.KeyCode.ENTER, null) {
+		@Override
+		public void handleAction(Object sender, Object target) {
+			loginAction(username.getValue(), password.getValue());
+
+		}
+	};
+        
+       login.addShortcutListener(shortcut);
+        
+        
         content.addComponent(login);
         content.setSizeUndefined();
         content.setMargin(true);
@@ -65,6 +72,19 @@ public class LoginPage extends VerticalLayout implements View {
     @Override
     public void enter(ViewChangeEvent event) {
 
+    }
+    
+    private void loginAction(String username, String password){
+        
+        
+        if (MyUI.AUTH.authenticate(username, password)) {
+                    VaadinSession.getCurrent().setAttribute("user", username);
+                    VaadinSession.getCurrent().setAttribute("userfunction", MyUI.AUTH.getUserfunction());
+                    Page.getCurrent().setUriFragment("");
+                    Page.getCurrent().reload();
+                } else {
+                    Notification.show("Invalid credentials", Notification.Type.ERROR_MESSAGE);
+                }
     }
 
 }
