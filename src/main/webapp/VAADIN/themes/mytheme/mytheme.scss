@@ -32,7 +32,16 @@
 @import "../valo/valo.scss";
 
 @mixin mytheme {
-  @include valo;
+  
 
-  // Insert your own theme rules here
+  .filterBorder {
+    border: 1px solid black;
+}
+
+  .border{
+    border: 1px solid lightsteelblue; 
+}
+
+@include valo;
+
 }

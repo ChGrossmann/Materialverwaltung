@@ -1627,6 +1627,14 @@ div.v-layout.v-horizontal.v-widget {
 	vertical-align: top;
 }
 
+.mytheme .filterBorder {
+	border: 1px solid black;
+}
+
+.mytheme .border {
+	border: 1px solid lightsteelblue;
+}
+
 .mytheme.v-app, .mytheme.v-app-loading {
 	font: 300 16px/1.55 "Open Sans", sans-serif;
 	color: #464646;

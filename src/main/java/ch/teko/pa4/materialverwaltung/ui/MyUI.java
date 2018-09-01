@@ -3,7 +3,6 @@ package ch.teko.pa4.materialverwaltung.ui;
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.annotations.Theme;
@@ -15,6 +14,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Label;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
