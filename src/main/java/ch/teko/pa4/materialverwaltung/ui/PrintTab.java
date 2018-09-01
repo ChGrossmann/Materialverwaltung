@@ -13,15 +13,23 @@ import ch.teko.pa4.materialverwaltung.beans.Article;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,8 +56,8 @@ public class PrintTab {
 //                Document newSearchDoc = new Document();
 //                searchArticleList = dao.searchArticle();
 
-                String home = System.getProperty("user.home");
-                String FILE_NAME = home + "/test.pdf";
+                String tempDir = System.getProperty("java.io.tmpdir");
+                String FILE_NAME = tempDir + "/test.pdf";
                 try {
                     Document document = new Document(PageSize.A4);
                     PdfWriter.getInstance(document, new FileOutputStream(new File(FILE_NAME)));
@@ -60,8 +68,15 @@ public class PrintTab {
                     document.add(chunk);
                     document.close();
 
-                } catch (Exception ex) {
-                    System.out.println(ex);
+                    
+                    File pdfFile = new File(FILE_NAME);
+                    Desktop.getDesktop().open(pdfFile);
+                    //pdfFile.delete();
+                    
+                } catch (IOException ex) {
+                    System.out.println("IOException: " + ex);
+                } catch (DocumentException ex) {
+                    System.out.println("DocumentException: " + ex);
                 }
 
             }
