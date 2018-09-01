@@ -7,9 +7,8 @@ package ch.teko.pa4.materialverwaltung.ui;
 
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
-import com.vaadin.annotations.Theme;
 import com.vaadin.server.Page;
-import com.vaadin.server.Sizeable;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
@@ -25,7 +24,6 @@ import org.bson.Document;
  *
  * @author ch.grossmann
  */
-
 public class SearchTab {
 
     List<Article> searchArticleList = new ArrayList<>();
@@ -37,19 +35,18 @@ public class SearchTab {
         final VerticalLayout searchLayout = new VerticalLayout();
 
         final HorizontalLayout filterLayout = new HorizontalLayout();
-        
-        filterLayout.addStyleName("filterBorder");
-        
 
-        
+        filterLayout.setMargin(true);
+        filterLayout.addStyleName("border");
+
         final VerticalLayout contentLayout = new VerticalLayout();
-        
+
         Button linieBtn = new Button("Linie", (searchEvent) -> {
 
             column = "linie";
 
         });
-        
+
         Button stationBtn = new Button("Station", (searchEvent) -> {
 
             column = "station";
@@ -61,14 +58,13 @@ public class SearchTab {
             column = "bezeichnung";
 
         });
-        
+
         Button typBtn = new Button("Typ", (searchEvent) -> {
 
             column = "typ";
 
         });
-        
-        
+
         Button beschreibungBtn = new Button("Beschreibung", (searchEvent) -> {
 
             column = "beschreibung";
@@ -82,20 +78,18 @@ public class SearchTab {
 
         filterLayout.addComponents(linieBtn, stationBtn, bezeichnungBtn, typBtn, beschreibungBtn, artNrBtn);
 
-        final HorizontalLayout textLayout = new HorizontalLayout();
-        
-        
+        final VerticalLayout textLayout = new VerticalLayout();
 
         TextField searchField = new TextField("Suchtext");
+
         Button searchBtn = new Button("Suchen", (searchEvent) -> {
-            
+
             /**
              * Das löscht das vorhergehende articleGrid
              */
-            if(contentLayout.getComponentCount() != 0){
+            if (contentLayout.getComponentCount() != 0) {
                 contentLayout.removeAllComponents();
             }
-            
 
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
@@ -113,7 +107,7 @@ public class SearchTab {
 
             }
 
-            if(searchArticleList.isEmpty()){
+            if (searchArticleList.isEmpty()) {
                 Notification notif = new Notification("Es wurde kein entsprechender Artikel gefunden.");
                 notif.setDelayMsec(3000);
                 notif.show(Page.getCurrent());
@@ -143,17 +137,14 @@ public class SearchTab {
             contentLayout.setMargin(false);
             contentLayout.addComponents(articelGrid);
 
-            
         });
-        
 
-            
-        
-
+        textLayout.setMargin(false);
         textLayout.addComponents(searchField, searchBtn);
 
-       
-        
+        textLayout.setComponentAlignment(searchField, Alignment.TOP_LEFT);
+        textLayout.setComponentAlignment(searchBtn, Alignment.TOP_LEFT);
+
         searchLayout.addComponents(filterLayout, textLayout, contentLayout);
 
         return searchLayout;

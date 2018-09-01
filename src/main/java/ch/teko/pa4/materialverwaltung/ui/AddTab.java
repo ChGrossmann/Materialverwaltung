@@ -16,6 +16,7 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
@@ -23,14 +24,11 @@ import com.vaadin.ui.VerticalLayout;
  *
  * @author ch.grossmann
  */
-
 public class AddTab {
 
     public Component addTab() {
 
         final VerticalLayout addLayout = new VerticalLayout();
-
-        
 
         Label bahnLab = new Label("Bahn");
         bahnLab.setWidth(null);
@@ -71,13 +69,16 @@ public class AddTab {
         Label boxLab = new Label("Box");
         TextField boxTxt = new TextField("");
         Label bemerkungLab = new Label("Bemerkung");
-        TextField bemerkungTxt = new TextField("");
-        
-        final GridLayout box1 = new GridLayout(2,3);
-        
+        TextArea bemerkungTxt = new TextArea("");
+
+        bemerkungTxt.setRows(3);
+        bemerkungTxt.setWidth("350px");
+        bemerkungTxt.setHeight("100px");
+
+        final GridLayout box1 = new GridLayout(2, 3);
 
         box1.setWidth("350px");
-        box1.setHeight("200px");
+        box1.setHeight("300px");
         box1.setMargin(true);
         box1.addComponent(bahnLab, 0, 0);
         box1.addComponent(bahnTxt, 1, 0);
@@ -85,21 +86,17 @@ public class AddTab {
         box1.addComponent(linieTxt, 1, 1);
         box1.addComponent(stationLab, 0, 2);
         box1.addComponent(stationTxt, 1, 2);
-        
-        
-        
+
         box1.setComponentAlignment(bahnLab, Alignment.MIDDLE_LEFT);
         box1.setComponentAlignment(linieLab, Alignment.MIDDLE_LEFT);
         box1.setComponentAlignment(stationLab, Alignment.MIDDLE_LEFT);
-        
+
         box1.setStyleName("border");
-        
-        
-        
-        final GridLayout box2 = new GridLayout(2,3);
-        
+
+        final GridLayout box2 = new GridLayout(2, 3);
+
         box2.setWidth("350px");
-        box2.setHeight("200px");
+        box2.setHeight("300px");
         box2.setMargin(true);
         box2.addComponent(system1Lab, 0, 0);
         box2.addComponent(system1Txt, 1, 0);
@@ -107,12 +104,15 @@ public class AddTab {
         box2.addComponent(system2Txt, 1, 1);
         box2.addComponent(system3Lab, 0, 2);
         box2.addComponent(system3Txt, 1, 2);
-        
-        
+
+        box2.setComponentAlignment(system1Lab, Alignment.MIDDLE_LEFT);
+        box2.setComponentAlignment(system2Lab, Alignment.MIDDLE_LEFT);
+        box2.setComponentAlignment(system3Lab, Alignment.MIDDLE_LEFT);
+
         box2.setStyleName("border");
-        
-        final GridLayout box3 = new GridLayout(2,5);
-        
+
+        final GridLayout box3 = new GridLayout(2, 5);
+
         box3.setWidth("350px");
         box3.setHeight("500px");
         box3.setMargin(true);
@@ -126,11 +126,17 @@ public class AddTab {
         box3.addComponent(artikelNrTxt, 1, 3);
         box3.addComponent(anzahlLab, 0, 4);
         box3.addComponent(anzahlTxt, 1, 4);
-        
+
+        box3.setComponentAlignment(bezeichnungLab, Alignment.MIDDLE_LEFT);
+        box3.setComponentAlignment(typLab, Alignment.MIDDLE_LEFT);
+        box3.setComponentAlignment(beschreibungLab, Alignment.MIDDLE_LEFT);
+        box3.setComponentAlignment(artikelNrLab, Alignment.MIDDLE_LEFT);
+        box3.setComponentAlignment(anzahlLab, Alignment.MIDDLE_LEFT);
+
         box3.setStyleName("border");
-        
-        final GridLayout box4 = new GridLayout(2,5);
-        
+
+        final GridLayout box4 = new GridLayout(2, 5);
+
         box4.setWidth("350px");
         box4.setHeight("500px");
         box4.setMargin(true);
@@ -144,20 +150,28 @@ public class AddTab {
         box4.addComponent(tablarTxt, 1, 3);
         box4.addComponent(boxLab, 0, 4);
         box4.addComponent(boxTxt, 1, 4);
-        
+
+        box4.setComponentAlignment(gestellLab, Alignment.MIDDLE_LEFT);
+        box4.setComponentAlignment(schieneLab, Alignment.MIDDLE_LEFT);
+        box4.setComponentAlignment(schrankLab, Alignment.MIDDLE_LEFT);
+        box4.setComponentAlignment(tablarLab, Alignment.MIDDLE_LEFT);
+        box4.setComponentAlignment(boxLab, Alignment.MIDDLE_LEFT);
+
         box4.setStyleName("border");
-        
-        
-        final GridLayout box5 = new GridLayout(2,1);
-        
+
+        final GridLayout box5 = new GridLayout(2, 1);
+
         box5.setWidth("720px");
-        box5.setHeight("150px");
+        box5.setHeight("220px");
         box5.setMargin(true);
         box5.addComponent(bemerkungLab, 0, 0);
         box5.addComponent(bemerkungTxt, 1, 0);
-        
+
+        box5.setComponentAlignment(bemerkungLab, Alignment.MIDDLE_LEFT);
+        box5.setComponentAlignment(bemerkungTxt, Alignment.TOP_CENTER);
+
         box5.setStyleName("border");
-        
+
         Label lab1 = new Label(" ");
         lab1.setWidth("20px");
         Label lab2 = new Label(" ");
@@ -166,11 +180,9 @@ public class AddTab {
         lab3.setWidth("20px");
         Label lab4 = new Label(" ");
         lab4.setHeight("20px");
-        
+
         final GridLayout addArticleLayout = new GridLayout(3, 5);
-        
-        
-        
+
         addArticleLayout.addComponent(box1, 0, 0);
         addArticleLayout.addComponent(lab1, 1, 0);
         addArticleLayout.addComponent(box2, 2, 0);
@@ -180,26 +192,9 @@ public class AddTab {
         addArticleLayout.addComponent(box4, 2, 2);
         addArticleLayout.addComponent(lab4, 0, 3, 2, 3);
         addArticleLayout.addComponent(box5, 0, 4, 2, 4);
-        
-        addArticleLayout.setColumnExpandRatio(0, 3);
-        addArticleLayout.setColumnExpandRatio(1, 1);
-        addArticleLayout.setColumnExpandRatio(2, 3);
-        addArticleLayout.setRowExpandRatio(1, 1);
-        addArticleLayout.setRowExpandRatio(3, 1);
-        
-        addArticleLayout.setComponentAlignment(box1, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(box2, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(box3, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(box4, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(box5, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(lab1, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(lab2, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(lab3, Alignment.MIDDLE_CENTER);
-        addArticleLayout.setComponentAlignment(lab4, Alignment.MIDDLE_CENTER);
-        
 
         final HorizontalLayout submitLayout = new HorizontalLayout();
-        
+
         Button addBtn = new Button("Hinzufügen", (addArticleEvent) -> {
             Article addArticle = new Article();
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
@@ -223,12 +218,11 @@ public class AddTab {
             addArticle.setBemerkung(bemerkungTxt.getValue());
 
             dao.addArticle(addArticle);
-            
+
             Notification notif = new Notification("Artikel wurde hinzugefügt.");
             notif.setDelayMsec(2000);
             notif.show(Page.getCurrent());
 
-            
             bahnTxt.clear();
             linieTxt.clear();
             stationTxt.clear();
@@ -246,7 +240,7 @@ public class AddTab {
             tablarTxt.clear();
             boxTxt.clear();
             bemerkungTxt.clear();
-            
+
         });
 
         submitLayout.addComponent(addBtn);
