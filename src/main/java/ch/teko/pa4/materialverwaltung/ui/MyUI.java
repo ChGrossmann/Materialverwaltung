@@ -82,7 +82,7 @@ public class MyUI extends UI {
             tabsheet.addTab(new EditTab().editTab(), "Ändern");
             tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");
         }
-        tabsheet.addTab(new PrintTab().printLayout, "Drucken");
+        tabsheet.addTab(new PrintTab().PrintTab(), "Drucken");
 
         // Hier werden die Erstellten Kompnenten eingefügt.
         rootLayout.addComponents(titleLayout, tabsheet);
