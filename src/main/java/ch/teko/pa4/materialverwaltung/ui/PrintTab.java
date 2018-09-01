@@ -17,6 +17,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
@@ -58,7 +59,14 @@ public class PrintTab {
                     Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
                     Chunk chunk = new Chunk("Hello World", font);
                     document.add(chunk);
+                    
+                    
                     document.close();
+                    
+                    File myFile = new File(FILE_NAME);
+                    Desktop.getDesktop().open(myFile);
+                    
+                    
 
                 } catch (Exception ex) {
                     System.out.println(ex);
