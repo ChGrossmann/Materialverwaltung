@@ -42,6 +42,12 @@
     border: 1px solid lightsteelblue; 
 }
 
+.title{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 @include valo;
 
 }
