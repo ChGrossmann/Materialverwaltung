@@ -10,6 +10,7 @@ import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -18,6 +19,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +45,7 @@ public class SearchTab {
     final VerticalLayout contentLayout = new VerticalLayout();
     final HorizontalLayout filterLayout = new HorizontalLayout();
     final VerticalLayout textLayout = new VerticalLayout();
+    final HorizontalLayout buttonLayout = new HorizontalLayout();
 
     Button linieBtn;
     Button stationBtn;
@@ -174,7 +177,9 @@ public class SearchTab {
          */
         if (contentLayout.getComponentCount() != 0) {
             contentLayout.removeAllComponents();
+            buttonLayout.removeAllComponents();
         }
+        
 
         MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
@@ -223,16 +228,31 @@ public class SearchTab {
         
         
         
+        if(VaadinSession.getCurrent().getAttribute("userfunction").toString() == "Admin"){
+        
         Button editBtn = new Button("Ändern", (editEvent) -> {
             
             Set<Article> editArticle = articelGrid.getSelectedItems();
-            Grid<Article> editGrid = new Grid<>();
-            editGrid.setItems(editArticle);
             
+            
+            List<Article> e = new ArrayList<>(editArticle);
+            
+            Article a = e.get(0);
+            
+            Window editWindow = new Window();
+            VerticalLayout subWindow = new VerticalLayout();
+            
+            editWindow.setContent(subWindow);
+            
+            subWindow.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(), 
+                    a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(), 
+                    a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(), 
+                    a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(), 
+                    a.getTablar(), a.getBox(), a.getBemerkung()));
+            
+            MyUI.getCurrent().addWindow(editWindow);
             
         });
-        
-        
         
         
         Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
@@ -252,8 +272,12 @@ public class SearchTab {
             searchAction();
             
         });
-
-        contentLayout.addComponents(articelGrid, editBtn, deleteBtn);
+        
+        buttonLayout.addComponents(editBtn, deleteBtn);
+        contentLayout.addComponents(articelGrid, buttonLayout);
+        }else{
+        contentLayout.addComponents(articelGrid);    
+        }
         
     }
 

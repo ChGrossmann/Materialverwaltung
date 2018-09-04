@@ -80,12 +80,14 @@ public class MyUI extends UI {
         titleLayout.setComponentAlignment(titleLab, Alignment.TOP_LEFT);
         titleLayout.setComponentAlignment(secure, Alignment.TOP_RIGHT);
         titleLayout.setComponentAlignment(logout, Alignment.BOTTOM_RIGHT);
+        
+        
         TabSheet tabsheet = new TabSheet();
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
         
         if (VaadinSession.getCurrent().getAttribute("userfunction").toString() == "Admin") {
             tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
-            tabsheet.addTab(new EditTab().editTab(), "Ändern");
+//            tabsheet.addTab(new EditTab().editTab(), "Ändern");
 //            tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");
         }
         tabsheet.addTab(new PrintTab().printLayout, "Drucken");

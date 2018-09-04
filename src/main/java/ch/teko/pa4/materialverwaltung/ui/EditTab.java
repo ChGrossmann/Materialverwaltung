@@ -18,6 +18,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import org.bson.Document;
 
 /**
  *
@@ -25,53 +26,127 @@ import com.vaadin.ui.VerticalLayout;
  */
 public class EditTab {
 
-    public Component editTab() {
-
-       final VerticalLayout addLayout = new VerticalLayout();
-
+    public Component editTab(String id, String setBahn, String setLinie, String setStation, 
+            String setSystem1, String setSystem2, String setSystem3, String setBezeichnung,
+            String setTyp, String setBeschreibung, String setArtikelNr, int setAnzahl, 
+            String setGestell, int setSchiene, String setSchrank, int setTablar, 
+            int setBox, String setBemerkung) {
+        
+        Article oldArticle = new Article();
+        
+        oldArticle.setId(id);
+        oldArticle.setBahn(setBahn);
+        oldArticle.setLinie(setLinie);
+        oldArticle.setStation(setStation);
+        oldArticle.setSystem1(setSystem1);
+        oldArticle.setSystem2(setSystem2);
+        oldArticle.setSystem3(setSystem3);
+        oldArticle.setBezeichnung(setBezeichnung);
+        oldArticle.setTyp(setTyp);
+        oldArticle.setBeschreibung(setBeschreibung);
+        oldArticle.setArtNr(setArtikelNr);
+        oldArticle.setAnzahl(setBahn);
+        oldArticle.setGestell(setBahn);
+        oldArticle.setSchiene(setBahn);
+        oldArticle.setSchrank(setBahn);
+        oldArticle.setTablar(setBahn);
+        oldArticle.setBox(setBahn);
+        oldArticle.setBemerkung(setBahn);
+        
         
 
+       final VerticalLayout addLayout = new VerticalLayout();
+      
         Label bahnLab = new Label("Bahn");
         bahnLab.setWidth(null);
         TextField bahnTxt = new TextField("");
+        bahnTxt.setPlaceholder(setBahn);
+        bahnTxt.setValue(setBahn);
         bahnTxt.setWidth(null);
+        
         Label linieLab = new Label("Linie");
         linieLab.setWidth(null);
         TextField linieTxt = new TextField("");
+        linieTxt.setPlaceholder(setLinie); 
+        linieTxt.setValue(setLinie);       
         linieTxt.setWidth(null);
+        
         Label stationLab = new Label("Station");
         stationLab.setWidth(null);
         TextField stationTxt = new TextField("");
+        stationTxt.setPlaceholder(setStation); 
+        stationTxt.setValue(setStation);
         stationTxt.setWidth(null);
+        
         Label system1Lab = new Label("System I");
         TextField system1Txt = new TextField("");
+        system1Txt.setPlaceholder(setStation); 
+        system1Txt.setValue(setStation);
+        
         Label system2Lab = new Label("System II");
         TextField system2Txt = new TextField("");
+        system2Txt.setPlaceholder(setSystem2); 
+        system2Txt.setValue(setSystem2); 
+        
         Label system3Lab = new Label("System III");
         TextField system3Txt = new TextField("");
+        system3Txt.setPlaceholder(setSystem3);
+        system3Txt.setValue(setSystem3);
+        
         Label bezeichnungLab = new Label("Bezeichnung");
         TextField bezeichnungTxt = new TextField("");
+        bezeichnungTxt.setPlaceholder(setBezeichnung);
+        bezeichnungTxt.setValue(setBezeichnung);
+        
         Label typLab = new Label("Typ");
         TextField typTxt = new TextField("");
+        typTxt.setPlaceholder(setTyp);
+        typTxt.setValue(setTyp);
+        
         Label beschreibungLab = new Label("Beschreibung");
         TextField beschreibungTxt = new TextField("");
+        beschreibungTxt.setPlaceholder(setBeschreibung); 
+        beschreibungTxt.setValue(setBeschreibung); 
+        
         Label artikelNrLab = new Label("Art. Nr.");
         TextField artikelNrTxt = new TextField("");
+        artikelNrTxt.setPlaceholder(setArtikelNr); 
+        artikelNrTxt.setValue(setArtikelNr);  
+        
         Label anzahlLab = new Label("Anzahl");
         TextField anzahlTxt = new TextField("");
+        anzahlTxt.setPlaceholder(Integer.toString(setAnzahl)); 
+        anzahlTxt.setValue(Integer.toString(setAnzahl));
+        
         Label gestellLab = new Label("Gestell");
         TextField gestellTxt = new TextField("");
+        gestellTxt.setPlaceholder(setGestell); 
+        gestellTxt.setValue(setGestell);       
+        
         Label schieneLab = new Label("Schiene");
         TextField schieneTxt = new TextField("");
+        schieneTxt.setPlaceholder(Integer.toString(setSchiene)); 
+        schieneTxt.setValue(Integer.toString(setSchiene)); 
+        
         Label schrankLab = new Label("Schrank");
         TextField schrankTxt = new TextField("");
+        schrankTxt.setPlaceholder(setSchrank); 
+        schrankTxt.setValue(setSchrank);      
+        
         Label tablarLab = new Label("Tablar");
         TextField tablarTxt = new TextField("");
+        tablarTxt.setPlaceholder(Integer.toString(setTablar)); 
+        tablarTxt.setValue(Integer.toString(setTablar)); 
+        
         Label boxLab = new Label("Box");
         TextField boxTxt = new TextField("");
+        boxTxt.setPlaceholder(Integer.toString(setBox)); 
+        boxTxt.setValue(Integer.toString(setBox));
+        
         Label bemerkungLab = new Label("Bemerkung");
         TextArea bemerkungTxt = new TextArea("");
-        
+        bemerkungTxt.setPlaceholder(setBemerkung);
+        bemerkungTxt.setValue(setBemerkung);
         bemerkungTxt.setRows(3);
         bemerkungTxt.setWidth("350px");
         bemerkungTxt.setHeight("100px");
@@ -190,50 +265,51 @@ public class EditTab {
         Label lab4 = new Label(" ");
         lab4.setHeight("20px");
         
-        final GridLayout addArticleLayout = new GridLayout(3, 5);
+        final GridLayout editArticleLayout = new GridLayout(3, 5);
         
         
         
-        addArticleLayout.addComponent(box1, 0, 0);
-        addArticleLayout.addComponent(lab1, 1, 0);
-        addArticleLayout.addComponent(box2, 2, 0);
-        addArticleLayout.addComponent(lab2, 0, 1, 2, 1);
-        addArticleLayout.addComponent(box3, 0, 2);
-        addArticleLayout.addComponent(lab3, 1, 2);
-        addArticleLayout.addComponent(box4, 2, 2);
-        addArticleLayout.addComponent(lab4, 0, 3, 2, 3);
-        addArticleLayout.addComponent(box5, 0, 4, 2, 4);
+        editArticleLayout.addComponent(box1, 0, 0);
+        editArticleLayout.addComponent(lab1, 1, 0);
+        editArticleLayout.addComponent(box2, 2, 0);
+        editArticleLayout.addComponent(lab2, 0, 1, 2, 1);
+        editArticleLayout.addComponent(box3, 0, 2);
+        editArticleLayout.addComponent(lab3, 1, 2);
+        editArticleLayout.addComponent(box4, 2, 2);
+        editArticleLayout.addComponent(lab4, 0, 3, 2, 3);
+        editArticleLayout.addComponent(box5, 0, 4, 2, 4);
         
 
     
 
         final HorizontalLayout submitLayout = new HorizontalLayout();
         
-        Button addBtn = new Button("Hinzufügen", (addArticleEvent) -> {
-            Article addArticle = new Article();
+        Button editBtn = new Button("Ändern", (addArticleEvent) -> {
+            
+            Article newArticle = new Article();
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
-            addArticle.setBahn(bahnTxt.getValue());
-            addArticle.setLinie(linieTxt.getValue());
-            addArticle.setStation(stationTxt.getValue());
-            addArticle.setSystem1(system1Txt.getValue());
-            addArticle.setSystem2(system2Txt.getValue());
-            addArticle.setSystem3(system3Txt.getValue());
-            addArticle.setBezeichnung(bezeichnungTxt.getValue());
-            addArticle.setTyp(typTxt.getValue());
-            addArticle.setBeschreibung(beschreibungTxt.getValue());
-            addArticle.setArtNr(artikelNrTxt.getValue());
-            addArticle.setAnzahl(Integer.parseInt(anzahlTxt.getValue()));
-            addArticle.setGestell(gestellTxt.getValue());
-            addArticle.setSchiene(Integer.parseInt(schieneTxt.getValue()));
-            addArticle.setSchrank(schrankTxt.getValue());
-            addArticle.setTablar(Integer.parseInt(tablarTxt.getValue()));
-            addArticle.setBox(Integer.parseInt(boxTxt.getValue()));
-            addArticle.setBemerkung(bemerkungTxt.getValue());
+            newArticle.setBahn(bahnTxt.getValue());
+            newArticle.setLinie(linieTxt.getValue());
+            newArticle.setStation(stationTxt.getValue());
+            newArticle.setSystem1(system1Txt.getValue());
+            newArticle.setSystem2(system2Txt.getValue());
+            newArticle.setSystem3(system3Txt.getValue());
+            newArticle.setBezeichnung(bezeichnungTxt.getValue());
+            newArticle.setTyp(typTxt.getValue());
+            newArticle.setBeschreibung(beschreibungTxt.getValue());
+            newArticle.setArtNr(artikelNrTxt.getValue());
+            newArticle.setAnzahl(Integer.parseInt(anzahlTxt.getValue()));
+            newArticle.setGestell(gestellTxt.getValue());
+            newArticle.setSchiene(Integer.parseInt(schieneTxt.getValue()));
+            newArticle.setSchrank(schrankTxt.getValue());
+            newArticle.setTablar(Integer.parseInt(tablarTxt.getValue()));
+            newArticle.setBox(Integer.parseInt(boxTxt.getValue()));
+            newArticle.setBemerkung(bemerkungTxt.getValue());
 
-            dao.addArticle(addArticle);
+            dao.editArticle(oldArticle, newArticle);
             
-            Notification notif = new Notification("Artikel wurde hinzugefügt.");
+            Notification notif = new Notification("Artikel wurde geändert.");
             notif.setDelayMsec(2000);
             notif.show(Page.getCurrent());
 
@@ -256,11 +332,12 @@ public class EditTab {
             boxTxt.clear();
             bemerkungTxt.clear();
             
+            MyUI.getCurrent().close();
         });
 
-        submitLayout.addComponent(addBtn);
+        submitLayout.addComponent(editBtn);
 
-        addLayout.addComponents(addArticleLayout, submitLayout);
+        addLayout.addComponents(editArticleLayout, submitLayout);
 
         return addLayout;
     }
