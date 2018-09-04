@@ -5,12 +5,15 @@
  */
 package ch.teko.pa4.materialverwaltung.beans;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author tbaec
  */
 public class Article {
 
+    private String id;
     private String bahn;
     private String linie;
     private String station;
@@ -31,8 +34,13 @@ public class Article {
 
     public Article() {
     }
+    
+    public Article(String id) {
+        
+        this.id = id;
+    }
 
-    public Article(String bahn, String linie, String station,
+    public Article(String id, String bahn, String linie, String station,
             String system1, String system2, String system3, String bezeichnung,
             String typ, String beschreibung, String artNr, int anzahl,
             String gestell, int schiene, String schrank, int tablar, int box,
@@ -55,6 +63,14 @@ public class Article {
         this.tablar = tablar;
         this.box = box;
         this.bemerkung = bemerkung;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getBahn() {

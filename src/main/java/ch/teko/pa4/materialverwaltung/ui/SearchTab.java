@@ -20,6 +20,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.bson.Document;
 
 /**
@@ -219,8 +220,41 @@ public class SearchTab {
         articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
 
         contentLayout.setMargin(false);
-        contentLayout.addComponents(articelGrid);
+        
+        
+        
+        Button editBtn = new Button("Ändern", (editEvent) -> {
+            
+            Set<Article> editArticle = articelGrid.getSelectedItems();
+            Grid<Article> editGrid = new Grid<>();
+            editGrid.setItems(editArticle);
+            
+            
+        });
+        
+        
+        
+        
+        Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
+            
+            Set<Article> deleteArticle = articelGrid.getSelectedItems();
+            
+            List<Article> a = new ArrayList<>(deleteArticle);
+            
+            long check = dao.deleteArticle(a.get(0).getId());
+            
+            if(check != 0){
+                Notification notif = new Notification("Der Artikel wurde gelöscht.");
+            notif.setDelayMsec(3000);
+            notif.show(Page.getCurrent());
+            }
+            
+            searchAction();
+            
+        });
 
+        contentLayout.addComponents(articelGrid, editBtn, deleteBtn);
+        
     }
 
-}
+}    

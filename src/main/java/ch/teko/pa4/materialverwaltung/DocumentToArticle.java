@@ -8,6 +8,7 @@ package ch.teko.pa4.materialverwaltung;
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import java.util.ArrayList;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -19,6 +20,7 @@ public class DocumentToArticle {
         //Bean Bill abfüllen
         Article article = new Article();
 
+        article.setId(doc.get("_id").toString());
         article.setBahn(doc.get("bahn").toString());
         article.setLinie(doc.get("linie").toString());
         article.setStation(doc.get("station").toString());

@@ -11,6 +11,8 @@ import com.mongodb.client.MongoCursor;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.bson.types.ObjectId;
+import com.mongodb.client.result.DeleteResult;
  
 /**
  *
@@ -84,6 +86,16 @@ public class MaterialverwaltungDao {
         }
 
         return searchArticle;
+    }
+    
+    public long deleteArticle(String id){
+        
+        conn.connection("Artikel");
+        
+        DeleteResult delCount =  conn.mdbCollection.deleteOne(new Document("_id", new ObjectId(id)));
+        
+        return delCount.getDeletedCount();
+        
     }
 
 
