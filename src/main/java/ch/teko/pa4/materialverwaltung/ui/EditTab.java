@@ -35,23 +35,23 @@ public class EditTab {
         Article oldArticle = new Article();
         
         oldArticle.setId(id);
-        oldArticle.setBahn(setBahn);
-        oldArticle.setLinie(setLinie);
-        oldArticle.setStation(setStation);
-        oldArticle.setSystem1(setSystem1);
-        oldArticle.setSystem2(setSystem2);
-        oldArticle.setSystem3(setSystem3);
-        oldArticle.setBezeichnung(setBezeichnung);
-        oldArticle.setTyp(setTyp);
-        oldArticle.setBeschreibung(setBeschreibung);
-        oldArticle.setArtNr(setArtikelNr);
-        oldArticle.setAnzahl(setBahn);
-        oldArticle.setGestell(setBahn);
-        oldArticle.setSchiene(setBahn);
-        oldArticle.setSchrank(setBahn);
-        oldArticle.setTablar(setBahn);
-        oldArticle.setBox(setBahn);
-        oldArticle.setBemerkung(setBahn);
+//        oldArticle.setBahn(setBahn);
+//        oldArticle.setLinie(setLinie);
+//        oldArticle.setStation(setStation);
+//        oldArticle.setSystem1(setSystem1);
+//        oldArticle.setSystem2(setSystem2);
+//        oldArticle.setSystem3(setSystem3);
+//        oldArticle.setBezeichnung(setBezeichnung);
+//        oldArticle.setTyp(setTyp);
+//        oldArticle.setBeschreibung(setBeschreibung);
+//        oldArticle.setArtNr(setArtikelNr);
+//        oldArticle.setAnzahl(setAnzahl);
+//        oldArticle.setGestell(setGestell);
+//        oldArticle.setSchiene(setSchiene);
+//        oldArticle.setSchrank(setSchrank);
+//        oldArticle.setTablar(setTablar);
+//        oldArticle.setBox(setBox);
+//        oldArticle.setBemerkung(setBemerkung);
         
         
 
@@ -314,24 +314,24 @@ public class EditTab {
             notif.show(Page.getCurrent());
 
             
-            bahnTxt.clear();
-            linieTxt.clear();
-            stationTxt.clear();
-            system1Txt.clear();
-            system2Txt.clear();
-            system3Txt.clear();
-            bezeichnungTxt.clear();
-            typTxt.clear();
-            beschreibungTxt.clear();
-            artikelNrTxt.clear();
-            anzahlTxt.clear();
-            gestellTxt.clear();
-            schieneTxt.clear();
-            schrankTxt.clear();
-            tablarTxt.clear();
-            boxTxt.clear();
-            bemerkungTxt.clear();
-            
+//            bahnTxt.clear();
+//            linieTxt.clear();
+//            stationTxt.clear();
+//            system1Txt.clear();
+//            system2Txt.clear();
+//            system3Txt.clear();
+//            bezeichnungTxt.clear();
+//            typTxt.clear();
+//            beschreibungTxt.clear();
+//            artikelNrTxt.clear();
+//            anzahlTxt.clear();
+//            gestellTxt.clear();
+//            schieneTxt.clear();
+//            schrankTxt.clear();
+//            tablarTxt.clear();
+//            boxTxt.clear();
+//            bemerkungTxt.clear();
+//            
             MyUI.getCurrent().close();
         });
 

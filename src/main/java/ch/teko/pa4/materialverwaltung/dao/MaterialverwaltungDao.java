@@ -8,6 +8,7 @@ package ch.teko.pa4.materialverwaltung.dao;
 import ch.teko.pa4.materialverwaltung.DocumentToArticle;
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -128,25 +129,27 @@ public class MaterialverwaltungDao {
         Document oldArticleDoc = new Document();
         
         oldArticleDoc.append("_id", new ObjectId(oldArticle.getId()));
-        oldArticleDoc.append("bahn", oldArticle.getBahn());
-        oldArticleDoc.append("linie", oldArticle.getLinie());
-        oldArticleDoc.append("station", oldArticle.getStation());
-        oldArticleDoc.append("system1", oldArticle.getSystem1());
-        oldArticleDoc.append("system2", oldArticle.getSystem2());
-        oldArticleDoc.append("system3", oldArticle.getSystem3());
-        oldArticleDoc.append("bezeichnung", oldArticle.getBezeichnung());
-        oldArticleDoc.append("typ", oldArticle.getTyp());
-        oldArticleDoc.append("beschreibung", oldArticle.getBeschreibung());
-        oldArticleDoc.append("artNr", oldArticle.getArtNr());
-        oldArticleDoc.append("anzahl", oldArticle.getAnzahl());
-        oldArticleDoc.append("gestell", oldArticle.getGestell());
-        oldArticleDoc.append("schiene", oldArticle.getSchiene());
-        oldArticleDoc.append("schrank", oldArticle.getSchrank());
-        oldArticleDoc.append("tablar", oldArticle.getTablar());
-        oldArticleDoc.append("box", oldArticle.getBox());
-        oldArticleDoc.append("bemerkung", oldArticle.getBemerkung());
+//        oldArticleDoc.append("bahn", oldArticle.getBahn());
+//        oldArticleDoc.append("linie", oldArticle.getLinie());
+//        oldArticleDoc.append("station", oldArticle.getStation());
+//        oldArticleDoc.append("system1", oldArticle.getSystem1());
+//        oldArticleDoc.append("system2", oldArticle.getSystem2());
+//        oldArticleDoc.append("system3", oldArticle.getSystem3());
+//        oldArticleDoc.append("bezeichnung", oldArticle.getBezeichnung());
+//        oldArticleDoc.append("typ", oldArticle.getTyp());
+//        oldArticleDoc.append("beschreibung", oldArticle.getBeschreibung());
+//        oldArticleDoc.append("artNr", oldArticle.getArtNr());
+//        oldArticleDoc.append("anzahl", oldArticle.getAnzahl());
+//        oldArticleDoc.append("gestell", oldArticle.getGestell());
+//        oldArticleDoc.append("schiene", oldArticle.getSchiene());
+//        oldArticleDoc.append("schrank", oldArticle.getSchrank());
+//        oldArticleDoc.append("tablar", oldArticle.getTablar());
+//        oldArticleDoc.append("box", oldArticle.getBox());
+//        oldArticleDoc.append("bemerkung", oldArticle.getBemerkung());
         
-        UpdateResult editCount =  conn.mdbCollection.updateOne(oldArticleDoc, newArticleDoc);
+        UpdateResult editArticle =  conn.mdbCollection.updateOne(eq(oldArticleDoc),new Document("$set", newArticleDoc));
+        
+        long editCount = editArticle.getModifiedCount();
         
         return editCount;
     }
