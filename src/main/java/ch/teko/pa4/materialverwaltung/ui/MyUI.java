@@ -31,7 +31,7 @@ import com.vaadin.ui.Label;
 public class MyUI extends UI {
 
     private Label secure = new Label("");
-    private Button logout = new Button("Logout");;
+    private Button logout = new Button("Logout");
 
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = MyUI.class)
@@ -48,12 +48,9 @@ public class MyUI extends UI {
 
         //Anmeldung
         if (getSession().getAttribute("user") != null) {
-             
+
             secure.setCaption("Eingeloggter Benutzer: " + VaadinSession.getCurrent().getAttribute("user").toString().toUpperCase());
 
-            
-
-             
             logout.addClickListener(new Button.ClickListener() {
                 private static final long serialVersionUID = 1L;
 
@@ -63,7 +60,6 @@ public class MyUI extends UI {
                     Page.getCurrent().reload();
                 }
             });
-            
 
         } else {
             AUTH = new Authentication();
@@ -72,7 +68,7 @@ public class MyUI extends UI {
             getNavigator().addView(LoginPage.NAME, LoginPage.class);
             getNavigator().setErrorView(LoginPage.class);
         }
-        
+
         Label titleLab = new Label("Materialverwaltung");
         titleLab.setStyleName("title");
         titleLayout.setSizeFull();
@@ -80,15 +76,12 @@ public class MyUI extends UI {
         titleLayout.setComponentAlignment(titleLab, Alignment.TOP_LEFT);
         titleLayout.setComponentAlignment(secure, Alignment.TOP_RIGHT);
         titleLayout.setComponentAlignment(logout, Alignment.BOTTOM_RIGHT);
-        
-        
+
         TabSheet tabsheet = new TabSheet();
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
-        
-        if (VaadinSession.getCurrent().getAttribute("userfunction").toString() == "Admin") {
+
+        if (VaadinSession.getCurrent().getAttribute("userfunction").toString().equals("Admin") ) {
             tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
-//            tabsheet.addTab(new EditTab().editTab(), "Ändern");
-//            tabsheet.addTab(new DeleteTab().deleteTab(), "Löschen");
         }
         tabsheet.addTab(new PrintTab().printLayout, "Drucken");
 

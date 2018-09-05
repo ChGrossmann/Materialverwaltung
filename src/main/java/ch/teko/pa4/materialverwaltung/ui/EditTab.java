@@ -18,7 +18,6 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import org.bson.Document;
 
 /**
  *
@@ -26,123 +25,106 @@ import org.bson.Document;
  */
 public class EditTab {
 
-    public Component editTab(String id, String setBahn, String setLinie, String setStation, 
-            String setSystem1, String setSystem2, String setSystem3, String setBezeichnung,
-            String setTyp, String setBeschreibung, String setArtikelNr, int setAnzahl, 
-            String setGestell, int setSchiene, String setSchrank, int setTablar, 
-            int setBox, String setBemerkung) {
-        
-        Article oldArticle = new Article();
-        
-        oldArticle.setId(id);
-//        oldArticle.setBahn(setBahn);
-//        oldArticle.setLinie(setLinie);
-//        oldArticle.setStation(setStation);
-//        oldArticle.setSystem1(setSystem1);
-//        oldArticle.setSystem2(setSystem2);
-//        oldArticle.setSystem3(setSystem3);
-//        oldArticle.setBezeichnung(setBezeichnung);
-//        oldArticle.setTyp(setTyp);
-//        oldArticle.setBeschreibung(setBeschreibung);
-//        oldArticle.setArtNr(setArtikelNr);
-//        oldArticle.setAnzahl(setAnzahl);
-//        oldArticle.setGestell(setGestell);
-//        oldArticle.setSchiene(setSchiene);
-//        oldArticle.setSchrank(setSchrank);
-//        oldArticle.setTablar(setTablar);
-//        oldArticle.setBox(setBox);
-//        oldArticle.setBemerkung(setBemerkung);
-        
-        
 
-       final VerticalLayout addLayout = new VerticalLayout();
-      
+    public Component editTab(String id, String setBahn, String setLinie, String setStation,
+            String setSystem1, String setSystem2, String setSystem3, String setBezeichnung,
+            String setTyp, String setBeschreibung, String setArtikelNr, int setAnzahl,
+            String setGestell, int setSchiene, String setSchrank, int setTablar,
+            int setBox, String setBemerkung) {
+
+        Article oldArticle = new Article();
+
+        oldArticle.setId(id);
+
+
+        final VerticalLayout addLayout = new VerticalLayout();
+
         Label bahnLab = new Label("Bahn");
         bahnLab.setWidth(null);
         TextField bahnTxt = new TextField("");
         bahnTxt.setPlaceholder(setBahn);
         bahnTxt.setValue(setBahn);
         bahnTxt.setWidth(null);
-        
+
         Label linieLab = new Label("Linie");
         linieLab.setWidth(null);
         TextField linieTxt = new TextField("");
-        linieTxt.setPlaceholder(setLinie); 
-        linieTxt.setValue(setLinie);       
+        linieTxt.setPlaceholder(setLinie);
+        linieTxt.setValue(setLinie);
         linieTxt.setWidth(null);
-        
+
         Label stationLab = new Label("Station");
         stationLab.setWidth(null);
         TextField stationTxt = new TextField("");
-        stationTxt.setPlaceholder(setStation); 
+        stationTxt.setPlaceholder(setStation);
         stationTxt.setValue(setStation);
         stationTxt.setWidth(null);
-        
+
         Label system1Lab = new Label("System I");
         TextField system1Txt = new TextField("");
-        system1Txt.setPlaceholder(setStation); 
+        system1Txt.setPlaceholder(setStation);
         system1Txt.setValue(setStation);
-        
+
         Label system2Lab = new Label("System II");
         TextField system2Txt = new TextField("");
-        system2Txt.setPlaceholder(setSystem2); 
-        system2Txt.setValue(setSystem2); 
-        
+        system2Txt.setPlaceholder(setSystem2);
+        system2Txt.setValue(setSystem2);
+
         Label system3Lab = new Label("System III");
         TextField system3Txt = new TextField("");
         system3Txt.setPlaceholder(setSystem3);
         system3Txt.setValue(setSystem3);
-        
+
         Label bezeichnungLab = new Label("Bezeichnung");
         TextField bezeichnungTxt = new TextField("");
         bezeichnungTxt.setPlaceholder(setBezeichnung);
         bezeichnungTxt.setValue(setBezeichnung);
-        
+
         Label typLab = new Label("Typ");
         TextField typTxt = new TextField("");
         typTxt.setPlaceholder(setTyp);
         typTxt.setValue(setTyp);
-        
+
         Label beschreibungLab = new Label("Beschreibung");
         TextField beschreibungTxt = new TextField("");
-        beschreibungTxt.setPlaceholder(setBeschreibung); 
-        beschreibungTxt.setValue(setBeschreibung); 
-        
+        beschreibungTxt.setPlaceholder(setBeschreibung);
+        beschreibungTxt.setValue(setBeschreibung);
+
         Label artikelNrLab = new Label("Art. Nr.");
         TextField artikelNrTxt = new TextField("");
-        artikelNrTxt.setPlaceholder(setArtikelNr); 
-        artikelNrTxt.setValue(setArtikelNr);  
-        
+        artikelNrTxt.setPlaceholder(setArtikelNr);
+        artikelNrTxt.setValue(setArtikelNr);
+
         Label anzahlLab = new Label("Anzahl");
         TextField anzahlTxt = new TextField("");
-        anzahlTxt.setPlaceholder(Integer.toString(setAnzahl)); 
+        anzahlTxt.setPlaceholder(Integer.toString(setAnzahl));
         anzahlTxt.setValue(Integer.toString(setAnzahl));
-        
+
         Label gestellLab = new Label("Gestell");
         TextField gestellTxt = new TextField("");
-        gestellTxt.setPlaceholder(setGestell); 
-        gestellTxt.setValue(setGestell);       
-        
+        gestellTxt.setPlaceholder(setGestell);
+        gestellTxt.setValue(setGestell);
+
         Label schieneLab = new Label("Schiene");
         TextField schieneTxt = new TextField("");
-        schieneTxt.setPlaceholder(Integer.toString(setSchiene)); 
-        schieneTxt.setValue(Integer.toString(setSchiene)); 
-        
+        schieneTxt.setPlaceholder(Integer.toString(setSchiene));
+        schieneTxt.setValue(Integer.toString(setSchiene));
+
         Label schrankLab = new Label("Schrank");
         TextField schrankTxt = new TextField("");
-        schrankTxt.setPlaceholder(setSchrank); 
-        schrankTxt.setValue(setSchrank);      
-        
+        schrankTxt.setPlaceholder(setSchrank);
+        schrankTxt.setValue(setSchrank);
+
         Label tablarLab = new Label("Tablar");
         TextField tablarTxt = new TextField("");
-        tablarTxt.setPlaceholder(Integer.toString(setTablar)); 
-        tablarTxt.setValue(Integer.toString(setTablar)); 
-        
+        tablarTxt.setPlaceholder(Integer.toString(setTablar));
+        tablarTxt.setValue(Integer.toString(setTablar));
+
         Label boxLab = new Label("Box");
         TextField boxTxt = new TextField("");
-        boxTxt.setPlaceholder(Integer.toString(setBox)); 
+        boxTxt.setPlaceholder(Integer.toString(setBox));
         boxTxt.setValue(Integer.toString(setBox));
-        
+
         Label bemerkungLab = new Label("Bemerkung");
         TextArea bemerkungTxt = new TextArea("");
         bemerkungTxt.setPlaceholder(setBemerkung);
@@ -150,10 +132,8 @@ public class EditTab {
         bemerkungTxt.setRows(3);
         bemerkungTxt.setWidth("350px");
         bemerkungTxt.setHeight("100px");
-        
-        
-        final GridLayout box1 = new GridLayout(2,3);
-        
+
+        final GridLayout box1 = new GridLayout(2, 3);
 
         box1.setWidth("350px");
         box1.setHeight("300px");
@@ -164,19 +144,15 @@ public class EditTab {
         box1.addComponent(linieTxt, 1, 1);
         box1.addComponent(stationLab, 0, 2);
         box1.addComponent(stationTxt, 1, 2);
-        
-        
-        
+
         box1.setComponentAlignment(bahnLab, Alignment.MIDDLE_LEFT);
         box1.setComponentAlignment(linieLab, Alignment.MIDDLE_LEFT);
         box1.setComponentAlignment(stationLab, Alignment.MIDDLE_LEFT);
-        
+
         box1.setStyleName("border");
-        
-        
-        
-        final GridLayout box2 = new GridLayout(2,3);
-        
+
+        final GridLayout box2 = new GridLayout(2, 3);
+
         box2.setWidth("350px");
         box2.setHeight("300px");
         box2.setMargin(true);
@@ -186,16 +162,15 @@ public class EditTab {
         box2.addComponent(system2Txt, 1, 1);
         box2.addComponent(system3Lab, 0, 2);
         box2.addComponent(system3Txt, 1, 2);
-        
+
         box2.setComponentAlignment(system1Lab, Alignment.MIDDLE_LEFT);
         box2.setComponentAlignment(system2Lab, Alignment.MIDDLE_LEFT);
         box2.setComponentAlignment(system3Lab, Alignment.MIDDLE_LEFT);
-        
-        
+
         box2.setStyleName("border");
-        
-        final GridLayout box3 = new GridLayout(2,5);
-        
+
+        final GridLayout box3 = new GridLayout(2, 5);
+
         box3.setWidth("350px");
         box3.setHeight("500px");
         box3.setMargin(true);
@@ -209,17 +184,17 @@ public class EditTab {
         box3.addComponent(artikelNrTxt, 1, 3);
         box3.addComponent(anzahlLab, 0, 4);
         box3.addComponent(anzahlTxt, 1, 4);
-        
+
         box3.setComponentAlignment(bezeichnungLab, Alignment.MIDDLE_LEFT);
         box3.setComponentAlignment(typLab, Alignment.MIDDLE_LEFT);
         box3.setComponentAlignment(beschreibungLab, Alignment.MIDDLE_LEFT);
         box3.setComponentAlignment(artikelNrLab, Alignment.MIDDLE_LEFT);
         box3.setComponentAlignment(anzahlLab, Alignment.MIDDLE_LEFT);
-        
+
         box3.setStyleName("border");
-        
-        final GridLayout box4 = new GridLayout(2,5);
-        
+
+        final GridLayout box4 = new GridLayout(2, 5);
+
         box4.setWidth("350px");
         box4.setHeight("500px");
         box4.setMargin(true);
@@ -233,29 +208,28 @@ public class EditTab {
         box4.addComponent(tablarTxt, 1, 3);
         box4.addComponent(boxLab, 0, 4);
         box4.addComponent(boxTxt, 1, 4);
-        
+
         box4.setComponentAlignment(gestellLab, Alignment.MIDDLE_LEFT);
         box4.setComponentAlignment(schieneLab, Alignment.MIDDLE_LEFT);
         box4.setComponentAlignment(schrankLab, Alignment.MIDDLE_LEFT);
         box4.setComponentAlignment(tablarLab, Alignment.MIDDLE_LEFT);
         box4.setComponentAlignment(boxLab, Alignment.MIDDLE_LEFT);
-        
+
         box4.setStyleName("border");
-        
-        
-        final GridLayout box5 = new GridLayout(2,1);
-        
+
+        final GridLayout box5 = new GridLayout(2, 1);
+
         box5.setWidth("720px");
         box5.setHeight("220px");
         box5.setMargin(true);
         box5.addComponent(bemerkungLab, 0, 0);
         box5.addComponent(bemerkungTxt, 1, 0);
-        
+
         box5.setComponentAlignment(bemerkungLab, Alignment.MIDDLE_LEFT);
         box5.setComponentAlignment(bemerkungTxt, Alignment.TOP_CENTER);
-        
+
         box5.setStyleName("border");
-        
+
         Label lab1 = new Label(" ");
         lab1.setWidth("20px");
         Label lab2 = new Label(" ");
@@ -264,11 +238,9 @@ public class EditTab {
         lab3.setWidth("20px");
         Label lab4 = new Label(" ");
         lab4.setHeight("20px");
-        
+
         final GridLayout editArticleLayout = new GridLayout(3, 5);
-        
-        
-        
+
         editArticleLayout.addComponent(box1, 0, 0);
         editArticleLayout.addComponent(lab1, 1, 0);
         editArticleLayout.addComponent(box2, 2, 0);
@@ -278,14 +250,11 @@ public class EditTab {
         editArticleLayout.addComponent(box4, 2, 2);
         editArticleLayout.addComponent(lab4, 0, 3, 2, 3);
         editArticleLayout.addComponent(box5, 0, 4, 2, 4);
-        
-
-    
 
         final HorizontalLayout submitLayout = new HorizontalLayout();
-        
+
         Button editBtn = new Button("Ändern", (addArticleEvent) -> {
-            
+
             Article newArticle = new Article();
             MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
@@ -308,31 +277,11 @@ public class EditTab {
             newArticle.setBemerkung(bemerkungTxt.getValue());
 
             dao.editArticle(oldArticle, newArticle);
-            
+
             Notification notif = new Notification("Artikel wurde geändert.");
             notif.setDelayMsec(2000);
             notif.show(Page.getCurrent());
 
-            
-//            bahnTxt.clear();
-//            linieTxt.clear();
-//            stationTxt.clear();
-//            system1Txt.clear();
-//            system2Txt.clear();
-//            system3Txt.clear();
-//            bezeichnungTxt.clear();
-//            typTxt.clear();
-//            beschreibungTxt.clear();
-//            artikelNrTxt.clear();
-//            anzahlTxt.clear();
-//            gestellTxt.clear();
-//            schieneTxt.clear();
-//            schrankTxt.clear();
-//            tablarTxt.clear();
-//            boxTxt.clear();
-//            bemerkungTxt.clear();
-//            
-            MyUI.getCurrent().close();
         });
 
         submitLayout.addComponent(editBtn);

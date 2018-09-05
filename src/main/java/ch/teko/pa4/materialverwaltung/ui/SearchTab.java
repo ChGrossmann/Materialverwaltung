@@ -32,14 +32,10 @@ import org.bson.Document;
 public class SearchTab {
 
     List<Article> searchArticleList = new ArrayList<>();
+    Window editWindow = new Window();
 
     private String column;
-//    private boolean toggleLinie = true;
-//    private boolean toggleStation = true;
-//    private boolean toggleBezeichnung = true;
-//    private boolean toggleTyp = true;
-//    private boolean toggleBeschreibung = true;
-//    private boolean toggleArtikelnummer = true;
+
 
     final VerticalLayout searchLayout = new VerticalLayout();
     final VerticalLayout contentLayout = new VerticalLayout();
@@ -53,6 +49,7 @@ public class SearchTab {
     Button typBtn;
     Button beschreibungBtn;
     Button artNrBtn;
+    Button löschenBtn;
 
     TextField searchField = new TextField("Suchtext");
 
@@ -71,7 +68,6 @@ public class SearchTab {
             typBtn.setEnabled(true);
             beschreibungBtn.setEnabled(true);
             artNrBtn.setEnabled(true);
-            
 
         });
 
@@ -86,7 +82,6 @@ public class SearchTab {
             beschreibungBtn.setEnabled(true);
             artNrBtn.setEnabled(true);
         });
-        
 
         bezeichnungBtn = new Button("Bezeichnung", (searchEvent) -> {
 
@@ -99,7 +94,6 @@ public class SearchTab {
             artNrBtn.setEnabled(true);
 
         });
-        
 
         typBtn = new Button("Typ", (searchEvent) -> {
 
@@ -112,7 +106,6 @@ public class SearchTab {
             artNrBtn.setEnabled(true);
 
         });
-        
 
         beschreibungBtn = new Button("Beschreibung", (searchEvent) -> {
 
@@ -125,7 +118,6 @@ public class SearchTab {
             artNrBtn.setEnabled(true);
 
         });
-        
 
         artNrBtn = new Button("Artikelnummer", (searchEvent) -> {
 
@@ -138,9 +130,20 @@ public class SearchTab {
             artNrBtn.setEnabled(false);
 
         });
-       
+        
+        löschenBtn = new Button("X", (searchEvent) -> {
 
-        filterLayout.addComponents(linieBtn, stationBtn, bezeichnungBtn, typBtn, beschreibungBtn, artNrBtn);
+            column = null;
+            linieBtn.setEnabled(true);
+            stationBtn.setEnabled(true);
+            bezeichnungBtn.setEnabled(true);
+            typBtn.setEnabled(true);
+            beschreibungBtn.setEnabled(true);
+            artNrBtn.setEnabled(true);
+
+        });
+
+        filterLayout.addComponents(linieBtn, stationBtn, bezeichnungBtn, typBtn, beschreibungBtn, artNrBtn, löschenBtn);
 
         Button searchBtn = new Button("Suchen", (searchEvent) -> {
 
@@ -179,22 +182,30 @@ public class SearchTab {
             contentLayout.removeAllComponents();
             buttonLayout.removeAllComponents();
         }
-        
 
         MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
         if (searchField.isEmpty()) {
-
+            
             searchArticleList = dao.searchArticle();
 
-        } else {
+        } else if(column == null){
 
+            
+                Notification notif = new Notification("Bitte einen Filter wählen.");
+            notif.setDelayMsec(3000);
+            notif.show(Page.getCurrent());
+            
+            
+
+        } else{
+            
             Document newSearchDoc = new Document();
 
             newSearchDoc.append(column, searchField.getValue());
 
             searchArticleList = dao.searchArticle(newSearchDoc);
-
+            
         }
 
         if (searchArticleList.isEmpty()) {
@@ -225,60 +236,70 @@ public class SearchTab {
         articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
 
         contentLayout.setMargin(false);
-        
-        
-        
-        if(VaadinSession.getCurrent().getAttribute("userfunction").toString() == "Admin"){
-        
-        Button editBtn = new Button("Ändern", (editEvent) -> {
-            
-            Set<Article> editArticle = articelGrid.getSelectedItems();
-            
-            
-            List<Article> e = new ArrayList<>(editArticle);
-            
-            Article a = e.get(0);
-            
-            Window editWindow = new Window();
-            VerticalLayout subWindow = new VerticalLayout();
-            
-            editWindow.setContent(subWindow);
-            
-            subWindow.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(), 
-                    a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(), 
-                    a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(), 
-                    a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(), 
-                    a.getTablar(), a.getBox(), a.getBemerkung()));
-            
-            MyUI.getCurrent().addWindow(editWindow);
-            
-        });
-        
-        
-        Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
-            
-            Set<Article> deleteArticle = articelGrid.getSelectedItems();
-            
-            List<Article> a = new ArrayList<>(deleteArticle);
-            
-            long check = dao.deleteArticle(a.get(0).getId());
-            
-            if(check != 0){
-                Notification notif = new Notification("Der Artikel wurde gelöscht.");
-            notif.setDelayMsec(3000);
+
+        if (VaadinSession.getCurrent().getAttribute("userfunction").toString().equals("Admin")) {
+
+            Button editBtn = new Button("Ändern", (editEvent) -> {
+
+                Set<Article> editArticle = articelGrid.getSelectedItems();
+                
+                if(editArticle.isEmpty()){
+                    Notification notif = new Notification("Bitte einen Artikel wählen.");
+            notif.setDelayMsec(2000);
             notif.show(Page.getCurrent());
-            }
-            
-            searchAction();
-            
-        });
-        
-        buttonLayout.addComponents(editBtn, deleteBtn);
-        contentLayout.addComponents(articelGrid, buttonLayout);
-        }else{
-        contentLayout.addComponents(articelGrid);    
+                }else{
+
+                List<Article> e = new ArrayList<>(editArticle);
+
+                Article a = e.get(0);
+
+                if (contentLayout.getComponentCount() != 0) {
+                    contentLayout.removeAllComponents();
+                    buttonLayout.removeAllComponents();
+                }
+
+                contentLayout.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(),
+                        a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(),
+                        a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(),
+                        a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(),
+                        a.getTablar(), a.getBox(), a.getBemerkung()));
+                }
+            });
+
+            Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
+
+                Set<Article> deleteArticle = articelGrid.getSelectedItems();
+                
+                if(deleteArticle.isEmpty()){
+                    Notification notif = new Notification("Bitte einen Artikel wählen.");
+            notif.setDelayMsec(2000);
+            notif.show(Page.getCurrent());
+                }else{
+
+                List<Article> a = new ArrayList<>(deleteArticle);
+
+                long check = dao.deleteArticle(a.get(0).getId());
+
+                if (check != 0) {
+                    Notification notif = new Notification("Der Artikel wurde gelöscht.");
+                    notif.setDelayMsec(3000);
+                    notif.show(Page.getCurrent());
+                }
+
+                searchAction();
+                }
+            });
+
+            buttonLayout.addComponents(editBtn, deleteBtn);
+            contentLayout.addComponents(articelGrid, buttonLayout);
+        } else {
+            contentLayout.addComponents(articelGrid);
         }
-        
+
     }
 
-}    
+    public Window getEditWindow() {
+        return editWindow;
+    }
+
+}

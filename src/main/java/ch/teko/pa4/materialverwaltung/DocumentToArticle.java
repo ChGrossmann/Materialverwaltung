@@ -6,9 +6,7 @@
 package ch.teko.pa4.materialverwaltung;
 
 import ch.teko.pa4.materialverwaltung.beans.Article;
-import java.util.ArrayList;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  *
