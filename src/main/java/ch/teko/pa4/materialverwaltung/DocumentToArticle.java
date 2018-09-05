@@ -9,7 +9,7 @@ import ch.teko.pa4.materialverwaltung.beans.Article;
 import org.bson.Document;
 
 /**
- *
+ *Hier wird aus einem Document ein Artikel Bean gemacht.
  * @author ch.grossmann
  */
 public class DocumentToArticle {
