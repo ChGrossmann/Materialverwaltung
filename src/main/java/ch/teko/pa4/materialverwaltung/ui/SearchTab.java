@@ -34,7 +34,6 @@ import org.bson.Document;
 public class SearchTab {
 
     List<Article> searchArticleList = new ArrayList<>();
-    
 
     private String column;
 
@@ -151,7 +150,7 @@ public class SearchTab {
 
         });
 
-        ShortcutListener shortcut = new ShortcutListener("Login", ShortcutAction.KeyCode.ENTER, null) {
+        ShortcutListener shortcut = new ShortcutListener("Search", ShortcutAction.KeyCode.ENTER, null) {
             @Override
             public void handleAction(Object sender, Object target) {
                 searchAction();
@@ -174,9 +173,9 @@ public class SearchTab {
 
     /**
      * Die searchAction wird durch den Suchen Button ausgelöst und unterscheidet
-     * von einer leeren Suche über alles und einer mit Filter.
-     * Das bestehende Grid wird gelöscht falls vorhanden.
-     * Die Buttons Ändern und Löschen sind nur ersichtlich wenn man als admin eingeloggt ist.
+     * von einer leeren Suche über alles und einer mit Filter. Das bestehende
+     * Grid wird gelöscht falls vorhanden. Die Buttons Ändern und Löschen sind
+     * nur ersichtlich wenn man als admin eingeloggt ist.
      */
     private void searchAction() {
 
@@ -214,104 +213,103 @@ public class SearchTab {
         }
 
         /**
-         * Falls kein Artikel gefunden wurde erscheint ein Hinweistext, andernfalls wird eine Tabelle erstellt und alle Artikel darin dargestellt.
+         * Falls kein Artikel gefunden wurde erscheint ein Hinweistext,
+         * andernfalls wird eine Tabelle erstellt und alle Artikel darin
+         * dargestellt.
          */
         if (searchArticleList.isEmpty()) {
             Notification notif = new Notification("Es wurde kein entsprechender Artikel gefunden.");
             notif.setDelayMsec(3000);
             notif.show(Page.getCurrent());
-        }
-        Grid<Article> articelGrid = new Grid<>();
-        articelGrid.setItems(searchArticleList);
-        articelGrid.setWidth("100%");
-        articelGrid.setHeight("100%");
-        articelGrid.addColumn(Article::getBahn).setCaption("Bahn");
-        articelGrid.addColumn(Article::getLinie).setCaption("Linie");
-        articelGrid.addColumn(Article::getStation).setCaption("Station");
-        articelGrid.addColumn(Article::getSystem1).setCaption("System 1");
-        articelGrid.addColumn(Article::getSystem2).setCaption("System 2");
-        articelGrid.addColumn(Article::getSystem3).setCaption("System 3");
-        articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
-        articelGrid.addColumn(Article::getTyp).setCaption("Typ");
-        articelGrid.addColumn(Article::getBeschreibung).setCaption("Beschreibung");
-        articelGrid.addColumn(Article::getArtNr).setCaption("Artikelnr.");
-        articelGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
-        articelGrid.addColumn(Article::getGestell).setCaption("Gestell");
-        articelGrid.addColumn(Article::getSchiene).setCaption("Schiene");
-        articelGrid.addColumn(Article::getSchrank).setCaption("Schrank");
-        articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
-        articelGrid.addColumn(Article::getBox).setCaption("Box");
-        articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
-
-        contentLayout.setMargin(false);
-
-        /**
-         * Wird nur ausgeführt wenn man als admin angemeldet ist.
-         */
-        if (VaadinSession.getCurrent().getAttribute("userfunction").toString().equals("Admin")) {
-
-            
-            Button editBtn = new Button("Ändern", (editEvent) -> {
-
-                Set<Article> editArticle = articelGrid.getSelectedItems();
-
-                if (editArticle.isEmpty()) {
-                    Notification notif = new Notification("Bitte einen Artikel wählen.");
-                    notif.setDelayMsec(2000);
-                    notif.show(Page.getCurrent());
-
-                } else {
-
-                    List<Article> e = new ArrayList<>(editArticle);
-
-                    Article a = e.get(0);
-
-                    if (contentLayout.getComponentCount() != 0) {
-                        contentLayout.removeAllComponents();
-                        buttonLayout.removeAllComponents();
-                    }
-
-                    contentLayout.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(),
-                            a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(),
-                            a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(),
-                            a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(),
-                            a.getTablar(), a.getBox(), a.getBemerkung()));
-                }
-            });
-
-            
-            Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
-
-                Set<Article> deleteArticle = articelGrid.getSelectedItems();
-
-                if (deleteArticle.isEmpty()) {
-                    Notification notif = new Notification("Bitte einen Artikel wählen.");
-                    notif.setDelayMsec(2000);
-                    notif.show(Page.getCurrent());
-                } else {
-
-                    List<Article> a = new ArrayList<>(deleteArticle);
-
-                    long check = dao.deleteArticle(a.get(0).getId());
-
-                    if (check != 0) {
-                        Notification notif = new Notification("Der Artikel wurde gelöscht.");
-                        notif.setDelayMsec(3000);
-                        notif.show(Page.getCurrent());
-                    }
-
-                    searchAction();
-                }
-            });
-
-            buttonLayout.addComponents(editBtn, deleteBtn);
-            contentLayout.addComponents(articelGrid, buttonLayout);
         } else {
-            contentLayout.addComponents(articelGrid);
+            Grid<Article> articelGrid = new Grid<>();
+            articelGrid.setItems(searchArticleList);
+            articelGrid.setWidth("100%");
+            articelGrid.setHeight("100%");
+            articelGrid.addColumn(Article::getBahn).setCaption("Bahn");
+            articelGrid.addColumn(Article::getLinie).setCaption("Linie");
+            articelGrid.addColumn(Article::getStation).setCaption("Station");
+            articelGrid.addColumn(Article::getSystem1).setCaption("System 1");
+            articelGrid.addColumn(Article::getSystem2).setCaption("System 2");
+            articelGrid.addColumn(Article::getSystem3).setCaption("System 3");
+            articelGrid.addColumn(Article::getBezeichnung).setCaption("Bezeichnung");
+            articelGrid.addColumn(Article::getTyp).setCaption("Typ");
+            articelGrid.addColumn(Article::getBeschreibung).setCaption("Beschreibung");
+            articelGrid.addColumn(Article::getArtNr).setCaption("Artikelnr.");
+            articelGrid.addColumn(Article::getAnzahl).setCaption("Anzahl");
+            articelGrid.addColumn(Article::getGestell).setCaption("Gestell");
+            articelGrid.addColumn(Article::getSchiene).setCaption("Schiene");
+            articelGrid.addColumn(Article::getSchrank).setCaption("Schrank");
+            articelGrid.addColumn(Article::getTablar).setCaption("Tablar");
+            articelGrid.addColumn(Article::getBox).setCaption("Box");
+            articelGrid.addColumn(Article::getBemerkung).setCaption("Bemerkung");
+
+            contentLayout.setMargin(false);
+
+            /**
+             * Wird nur ausgeführt wenn man als admin angemeldet ist.
+             */
+            if (VaadinSession.getCurrent().getAttribute("userfunction").toString().equals("Admin")) {
+
+                Button editBtn = new Button("Ändern", (editEvent) -> {
+
+                    Set<Article> editArticle = articelGrid.getSelectedItems();
+
+                    if (editArticle.isEmpty()) {
+                        Notification notif = new Notification("Bitte einen Artikel wählen.");
+                        notif.setDelayMsec(2000);
+                        notif.show(Page.getCurrent());
+
+                    } else {
+
+                        List<Article> e = new ArrayList<>(editArticle);
+
+                        Article a = e.get(0);
+
+                        if (contentLayout.getComponentCount() != 0) {
+                            contentLayout.removeAllComponents();
+                            buttonLayout.removeAllComponents();
+                        }
+
+                        contentLayout.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(),
+                                a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(),
+                                a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(),
+                                a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(),
+                                a.getTablar(), a.getBox(), a.getBemerkung()));
+                    }
+                });
+
+                Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
+
+                    Set<Article> deleteArticle = articelGrid.getSelectedItems();
+
+                    if (deleteArticle.isEmpty()) {
+                        Notification notif = new Notification("Bitte einen Artikel wählen.");
+                        notif.setDelayMsec(2000);
+                        notif.show(Page.getCurrent());
+                    } else {
+
+                        List<Article> a = new ArrayList<>(deleteArticle);
+
+                        long check = dao.deleteArticle(a.get(0).getId());
+
+                        if (check != 0) {
+                            Notification notif = new Notification("Der Artikel wurde gelöscht.");
+                            notif.setDelayMsec(3000);
+                            notif.show(Page.getCurrent());
+                        }
+
+                        searchAction();
+                    }
+                });
+
+                buttonLayout.addComponents(editBtn, deleteBtn);
+                contentLayout.addComponents(articelGrid, buttonLayout);
+            } else {
+                contentLayout.addComponents(articelGrid);
+            }
+
         }
-
     }
-
-    
 
 }
