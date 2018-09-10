@@ -13,8 +13,12 @@ import com.vaadin.ui.VerticalLayout;
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -46,9 +50,6 @@ public class PrintTab {
 
             @Override
             public void buttonClick(Button.ClickEvent event) {
-//                MaterialverwaltungDao dao = new MaterialverwaltungDao();
-//                Document newSearchDoc = new Document();
-//                searchArticleList = dao.searchArticle();
 
                 List<Article> searchArticleList = new ArrayList<>();
                 MaterialverwaltungDao dao = new MaterialverwaltungDao();
@@ -58,62 +59,54 @@ public class PrintTab {
                 String FILE_NAME = tempDir + "/test.pdf";
                 try {
 
-                    Document document = new Document(PageSize.A4.rotate(),5,5,5,5);
+                    Document document = new Document(PageSize.A4.rotate(), 5, 5, 5, 5);
                     PdfWriter.getInstance(document, new FileOutputStream(new File(FILE_NAME)));
                     document.open();
                     document.leftMargin();
 
-                    //Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-                    //PdfPTable table = new PdfPTable(searchArticleList.size());
-                    PdfPTable table = new PdfPTable(17);
+                    PdfPTable table = new PdfPTable(16);
+                    table.setWidthPercentage(100);
 
-                    PdfPCell cell = new PdfPCell();
-                    
-                    cell.setPaddingTop(0f);
-                    cell.setPaddingLeft(0f);
+                    Font fTitle = new Font(FontFamily.COURIER, 8, Font.BOLD, GrayColor.BLACK);
 
-                    table.addCell("Bahn");
-                    table.addCell("Linie");
-                    table.addCell("Station");
-                    table.addCell("System1");
-                    table.addCell("System2");
-                    table.addCell("System3");
-                    table.addCell("Bezeichnung");
-                    table.addCell("Typ");
-                    table.addCell("Beschreibung");
-                    table.addCell("Artikelnr.");
-                    table.addCell("Anzahl");
-                    table.addCell("Gestell");
-                    table.addCell("Schiene");
-                    table.addCell("Schrank");
-                    table.addCell("Tablar");
-                    table.addCell("Box");
-                    //table.addCell("Bemerkung");
+                    table.addCell(createFontCell("Bahn",fTitle));
+                    table.addCell(createFontCell("Linie",fTitle));
+                    table.addCell(createFontCell("Station",fTitle));
+                    table.addCell(createFontCell("System1",fTitle));
+                    table.addCell(createFontCell("System2",fTitle));
+                    table.addCell(createFontCell("System3",fTitle));
+                    table.addCell(createFontCell("Bezeichnung",fTitle));
+                    table.addCell(createFontCell("Typ",fTitle));
+                    table.addCell(createFontCell("Beschreibung",fTitle));              
+                    table.addCell(createFontCell("Artikelnr.",fTitle));
+                    table.addCell(createFontCell("Anzahl",fTitle));
+                    table.addCell(createFontCell("Gestell",fTitle));
+                    table.addCell(createFontCell("Schiene",fTitle));
+                    table.addCell(createFontCell("Schrank",fTitle));
+                    table.addCell(createFontCell("Tablar",fTitle));
+                    table.addCell(createFontCell("Box",fTitle));
 
+                    Font fText = new Font(FontFamily.COURIER, 6, Font.NORMAL, GrayColor.BLACK);
                     for (Article p : searchArticleList) {
 
-                        //Chunk chunk = new Chunk(p.getLinie(), font);
-                        //document.add(chunk);
-                        table.addCell(p.getBahn());
-                        table.addCell(p.getLinie());
-                        table.addCell(p.getStation());
-                        table.addCell(p.getSystem1());
-                        table.addCell(p.getSystem2());
-                        table.addCell(p.getSystem3());
-                        table.addCell(p.getBezeichnung());
-                        table.addCell(p.getTyp());
-                        table.addCell(p.getBeschreibung());
-                        table.addCell(p.getArtNr());
-                        table.addCell(String.valueOf(p.getAnzahl()));
-                        table.addCell(String.valueOf(p.getGestell()));
-                        table.addCell(String.valueOf(p.getSchiene()));
-                        table.addCell(String.valueOf(p.getSchrank()));
-                        table.addCell(String.valueOf(p.getTablar()));
-                        table.addCell(String.valueOf(p.getBox()));
-                        //table.addCell(p.getBemerkung());
+                        table.addCell(createFontCell(p.getBahn(),fText));
+                        table.addCell(createFontCell(p.getLinie(),fText));
+                        table.addCell(createFontCell(p.getStation(),fText));
+                        table.addCell(createFontCell(p.getSystem1(),fText));
+                        table.addCell(createFontCell(p.getSystem2(),fText));
+                        table.addCell(createFontCell(p.getSystem3(),fText));
+                        table.addCell(createFontCell(p.getBezeichnung(),fText));
+                        table.addCell(createFontCell(p.getTyp(),fText));
+                        table.addCell(createFontCell(p.getBeschreibung(),fText));
+                        table.addCell(createFontCell(p.getArtNr(),fText));
+                        table.addCell(createFontCell(String.valueOf(p.getAnzahl()),fText));
+                        table.addCell(createFontCell(String.valueOf(p.getGestell()),fText));
+                        table.addCell(createFontCell(String.valueOf(p.getSchiene()),fText));
+                        table.addCell(createFontCell(String.valueOf(p.getSchrank()),fText));
+                        table.addCell(createFontCell(String.valueOf(p.getTablar()),fText));
+                        table.addCell(createFontCell(String.valueOf(p.getBox()),fText));
                     }
-                    table.addCell(cell);
-                    table.setComplete(true);
+
                     document.add(table);
                     document.close();
 
@@ -136,5 +129,10 @@ public class PrintTab {
         printLayout.addComponents(content);
 
         return printLayout;
+    }
+
+    public PdfPCell createFontCell(String title, Font f) {
+        PdfPCell cell = new PdfPCell(new Phrase(title, f));
+        return cell;
     }
 }
