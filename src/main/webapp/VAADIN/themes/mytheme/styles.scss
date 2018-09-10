@@ -1,0 +1,14 @@
+@import "mytheme.scss";
+@import "addons.scss";
+
+// This file prefixes all rules with the theme name to avoid causing conflicts with other themes.
+// The actual styles should be defined in mytheme.scss
+
+.mytheme {
+  @include addons;
+  @include mytheme;
+  
+  
+  // in mytheme geschriebene styles werden importier und sind so besser verfügbar da ein spezifischer name gegeben ist.
+
+}
