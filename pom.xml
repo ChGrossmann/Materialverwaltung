@@ -4,18 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>PA4</groupId>
-	<artifactId>WebbasierteMaterialverwaltung</artifactId>
+	<artifactId>Materialverwaltung</artifactId>
 	<packaging>war</packaging>
 	<version>2018-06-02</version>
-	<name>WebbasierteMaterialverwaltung</name>
+	<name>Materialverwaltung</name>
 
 	<prerequisites>
 		<maven>3</maven>
 	</prerequisites>
 
 	<properties>
-		<vaadin.version>8.5.2</vaadin.version>
-		<vaadin.plugin.version>8.5.2</vaadin.plugin.version>
+		<vaadin.version>8.4.4</vaadin.version>
+		<vaadin.plugin.version>8.4.4</vaadin.plugin.version>
 		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -70,7 +70,21 @@
 	  <groupId>org.mongodb</groupId>
 	  <artifactId>mongodb-driver-sync</artifactId>
 	  <version>3.7.1</version>
-	  <type>jar</type>
+	 </dependency>
+	 <dependency>
+	  <groupId>com.itextpdf</groupId>
+	  <artifactId>itextpdf</artifactId>
+	  <version>5.5.10</version>
+	 </dependency>
+	 <dependency>
+	  <groupId>org.apache.pdfbox</groupId>
+	  <artifactId>pdfbox</artifactId>
+	  <version>2.0.4</version>
+	 </dependency>
+	 <dependency>
+	  <groupId>org.bouncycastle</groupId>
+	  <artifactId>bcprov-jdk15on</artifactId>
+	  <version>1.56</version>
 	 </dependency>
 	</dependencies>
 
@@ -102,7 +116,7 @@
 					</execution>
 				</executions>
 			 <configuration>
-			  <runTarget>http://localhost:8080/WebbasierteMaterialverwaltung</runTarget>
+			  <runTarget>http://localhost:8080/Materialverwaltung</runTarget>
 			 </configuration>
 			</plugin>
 			<plugin>
