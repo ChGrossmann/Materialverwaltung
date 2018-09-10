@@ -60,18 +60,22 @@ public class AddTab {
         TextField beschreibungTxt = new TextField("");
         Label artikelNrLab = new Label("Art. Nr.");
         TextField artikelNrTxt = new TextField("");
-        Label anzahlLab = new Label("Anzahl");
-        TextField anzahlTxt = new TextField("");
+        Label anzahlLab = new Label("Anzahl"); 
+        TextField anzahlTxt = new TextField(""); // int
+        anzahlTxt.setPlaceholder("Bitte nur Zahlen");
         Label gestellLab = new Label("Gestell");
         TextField gestellTxt = new TextField("");
-        Label schieneLab = new Label("Schiene");
+        Label schieneLab = new Label("Schiene"); // int
         TextField schieneTxt = new TextField("");
+        schieneTxt.setPlaceholder("Bitte nur Zahlen");
         Label schrankLab = new Label("Schrank");
         TextField schrankTxt = new TextField("");
         Label tablarLab = new Label("Tablar");
-        TextField tablarTxt = new TextField("");
-        Label boxLab = new Label("Box");
+        TextField tablarTxt = new TextField(""); // int
+        tablarTxt.setPlaceholder("Bitte nur Zahlen");
+        Label boxLab = new Label("Box"); // int
         TextField boxTxt = new TextField("");
+        boxTxt.setPlaceholder("Bitte nur Zahlen");
         Label bemerkungLab = new Label("Bemerkung");
         TextArea bemerkungTxt = new TextArea("");
 
