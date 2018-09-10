@@ -13,7 +13,6 @@ import com.vaadin.ui.VerticalLayout;
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.PageSize;
