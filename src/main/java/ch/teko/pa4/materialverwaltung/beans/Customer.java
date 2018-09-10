@@ -6,8 +6,8 @@
 package ch.teko.pa4.materialverwaltung.beans;
 
 /**
- *
- * @author ch.grossmann
+ *Vorbereitetes Bean für unseren Benutzer.
+ * @author ch.grossmann, t.baechler
  */
 public class Customer {
     

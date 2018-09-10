@@ -8,7 +8,6 @@ package ch.teko.pa4.materialverwaltung.ui;
 import ch.teko.pa4.materialverwaltung.beans.Article;
 import ch.teko.pa4.materialverwaltung.dao.MaterialverwaltungDao;
 import com.vaadin.server.Page;
-import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -21,11 +20,16 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 /**
- *
- * @author ch.grossmann
+ * Hier werden die Elemente für das Hinzufügen eines Artikels erstellt.
+ * Alle Textfelder und der Hinzufügen Button werden erstellt und in den entsprechenden Layouts bereitgestellt.
+ * @author ch.grossmann, t.baechler
  */
 public class AddTab {
 
+    /**
+     * 
+     * @return 
+     */
     public Component addTab() {
 
         final VerticalLayout addLayout = new VerticalLayout();
@@ -195,6 +199,11 @@ public class AddTab {
 
         final HorizontalLayout submitLayout = new HorizontalLayout();
 
+        
+        /**
+         * Mit dem Button werden alle Values der Textfelder aufgenommen und in ein Artikel Bean gespeichert und an die addArticle Methode übergeben.
+         * Alle Textfelder werden gelöscht.
+         */
         Button addBtn = new Button("Hinzufügen", (addArticleEvent) -> {
             Article addArticle = new Article();
             MaterialverwaltungDao dao = new MaterialverwaltungDao();

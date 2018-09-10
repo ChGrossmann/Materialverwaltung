@@ -19,23 +19,24 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.bson.Document;
 
 /**
+ * Hier werden die Elemente für die Suche von Artikeln erstellt Alle Textfelder
+ * und der Suchen Button werden erstellt und in den entsprechenden Layouts
+ * bereitgestellt.
  *
- * @author ch.grossmann
+ * @author ch.grossmann, t.baechler
  */
 public class SearchTab {
 
     List<Article> searchArticleList = new ArrayList<>();
-    Window editWindow = new Window();
+    
 
     private String column;
-
 
     final VerticalLayout searchLayout = new VerticalLayout();
     final VerticalLayout contentLayout = new VerticalLayout();
@@ -71,7 +72,6 @@ public class SearchTab {
 
         });
 
-//        linieBtn.setDisableOnClick(true);
         stationBtn = new Button("Station", (searchEvent) -> {
 
             column = "station";
@@ -130,7 +130,7 @@ public class SearchTab {
             artNrBtn.setEnabled(false);
 
         });
-        
+
         löschenBtn = new Button("X", (searchEvent) -> {
 
             column = null;
@@ -163,7 +163,6 @@ public class SearchTab {
 
         textLayout.setMargin(false);
         textLayout.addComponents(searchField, searchBtn);
-
         textLayout.setComponentAlignment(searchField, Alignment.TOP_LEFT);
         textLayout.setComponentAlignment(searchBtn, Alignment.TOP_LEFT);
 
@@ -173,6 +172,12 @@ public class SearchTab {
 
     }
 
+    /**
+     * Die searchAction wird durch den Suchen Button ausgelöst und unterscheidet
+     * von einer leeren Suche über alles und einer mit Filter.
+     * Das bestehende Grid wird gelöscht falls vorhanden.
+     * Die Buttons Ändern und Löschen sind nur ersichtlich wenn man als admin eingeloggt ist.
+     */
     private void searchAction() {
 
         /**
@@ -185,29 +190,32 @@ public class SearchTab {
 
         MaterialverwaltungDao dao = new MaterialverwaltungDao();
 
+        /**
+         * Falls kein Suchtext übergeben wird werden alle Artikel ausgelesen.
+         */
         if (searchField.isEmpty()) {
-            
+
             searchArticleList = dao.searchArticle();
 
-        } else if(column == null){
+        } else if (column == null) {
 
-            
-                Notification notif = new Notification("Bitte einen Filter wählen.");
+            Notification notif = new Notification("Bitte einen Filter wählen.");
             notif.setDelayMsec(3000);
             notif.show(Page.getCurrent());
-            
-            
 
-        } else{
-            
+        } else {
+
             Document newSearchDoc = new Document();
 
             newSearchDoc.append(column, searchField.getValue());
 
             searchArticleList = dao.searchArticle(newSearchDoc);
-            
+
         }
 
+        /**
+         * Falls kein Artikel gefunden wurde erscheint ein Hinweistext, andernfalls wird eine Tabelle erstellt und alle Artikel darin dargestellt.
+         */
         if (searchArticleList.isEmpty()) {
             Notification notif = new Notification("Es wurde kein entsprechender Artikel gefunden.");
             notif.setDelayMsec(3000);
@@ -237,56 +245,62 @@ public class SearchTab {
 
         contentLayout.setMargin(false);
 
+        /**
+         * Wird nur ausgeführt wenn man als admin angemeldet ist.
+         */
         if (VaadinSession.getCurrent().getAttribute("userfunction").toString().equals("Admin")) {
 
+            
             Button editBtn = new Button("Ändern", (editEvent) -> {
 
                 Set<Article> editArticle = articelGrid.getSelectedItems();
-                
-                if(editArticle.isEmpty()){
+
+                if (editArticle.isEmpty()) {
                     Notification notif = new Notification("Bitte einen Artikel wählen.");
-            notif.setDelayMsec(2000);
-            notif.show(Page.getCurrent());
-                }else{
+                    notif.setDelayMsec(2000);
+                    notif.show(Page.getCurrent());
 
-                List<Article> e = new ArrayList<>(editArticle);
+                } else {
 
-                Article a = e.get(0);
+                    List<Article> e = new ArrayList<>(editArticle);
 
-                if (contentLayout.getComponentCount() != 0) {
-                    contentLayout.removeAllComponents();
-                    buttonLayout.removeAllComponents();
-                }
+                    Article a = e.get(0);
 
-                contentLayout.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(),
-                        a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(),
-                        a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(),
-                        a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(),
-                        a.getTablar(), a.getBox(), a.getBemerkung()));
+                    if (contentLayout.getComponentCount() != 0) {
+                        contentLayout.removeAllComponents();
+                        buttonLayout.removeAllComponents();
+                    }
+
+                    contentLayout.addComponent(new EditTab().editTab(a.getId(), a.getBahn(), a.getLinie(),
+                            a.getStation(), a.getSystem1(), a.getSystem2(), a.getSystem3(),
+                            a.getBezeichnung(), a.getTyp(), a.getBeschreibung(), a.getArtNr(),
+                            a.getAnzahl(), a.getGestell(), a.getSchiene(), a.getSchrank(),
+                            a.getTablar(), a.getBox(), a.getBemerkung()));
                 }
             });
 
+            
             Button deleteBtn = new Button("Löschen", (deleteEvent) -> {
 
                 Set<Article> deleteArticle = articelGrid.getSelectedItems();
-                
-                if(deleteArticle.isEmpty()){
+
+                if (deleteArticle.isEmpty()) {
                     Notification notif = new Notification("Bitte einen Artikel wählen.");
-            notif.setDelayMsec(2000);
-            notif.show(Page.getCurrent());
-                }else{
-
-                List<Article> a = new ArrayList<>(deleteArticle);
-
-                long check = dao.deleteArticle(a.get(0).getId());
-
-                if (check != 0) {
-                    Notification notif = new Notification("Der Artikel wurde gelöscht.");
-                    notif.setDelayMsec(3000);
+                    notif.setDelayMsec(2000);
                     notif.show(Page.getCurrent());
-                }
+                } else {
 
-                searchAction();
+                    List<Article> a = new ArrayList<>(deleteArticle);
+
+                    long check = dao.deleteArticle(a.get(0).getId());
+
+                    if (check != 0) {
+                        Notification notif = new Notification("Der Artikel wurde gelöscht.");
+                        notif.setDelayMsec(3000);
+                        notif.show(Page.getCurrent());
+                    }
+
+                    searchAction();
                 }
             });
 
@@ -298,8 +312,6 @@ public class SearchTab {
 
     }
 
-    public Window getEditWindow() {
-        return editWindow;
-    }
+    
 
 }

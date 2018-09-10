@@ -18,13 +18,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
 
 /**
- * This UI is the application entry point. A UI may either represent a browser
- * window (or tab) or some part of an HTML page where a Vaadin application is
- * embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is
- * intended to be overridden to add component to the user interface and
- * initialize non-component functionality.
+ * Der Eintrittspunkt für das Programm wird hier erstellt.
  */
 @SuppressWarnings("serial")
 @Theme("mytheme")
@@ -32,21 +26,20 @@ public class MyUI extends UI {
 
     private Label secure = new Label("");
     private Button logout = new Button("Logout");
-
-    @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = MyUI.class)
-    public static class Servlet extends VaadinServlet {
-    }
-
     public static Authentication AUTH;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        // Das Ausgewählte Layout für die Elemente
+        /**
+         * Das oberste Layout der Startseite ist das rootLayout.
+         */
         final VerticalLayout rootLayout = new VerticalLayout();
         final HorizontalLayout titleLayout = new HorizontalLayout();
 
-        //Anmeldung
+        /**
+         * Die Anmeldung wird durchgeführt wenn noch keine Session vorhanden ist.
+         * Liest den Benutzer aus und gibt ihr aus oder setzt den Benutzer via Login.
+         */
         if (getSession().getAttribute("user") != null) {
 
             secure.setCaption("Eingeloggter Benutzer: " + VaadinSession.getCurrent().getAttribute("user").toString().toUpperCase());
@@ -60,7 +53,6 @@ public class MyUI extends UI {
                     Page.getCurrent().reload();
                 }
             });
-
         } else {
             AUTH = new Authentication();
             VaadinSession.getCurrent().setAttribute("userfunction", "");
@@ -68,6 +60,7 @@ public class MyUI extends UI {
             getNavigator().addView(LoginPage.NAME, LoginPage.class);
             getNavigator().setErrorView(LoginPage.class);
         }
+        
 
         Label titleLab = new Label("Materialverwaltung");
         titleLab.setStyleName("title");
@@ -77,18 +70,28 @@ public class MyUI extends UI {
         titleLayout.setComponentAlignment(secure, Alignment.TOP_RIGHT);
         titleLayout.setComponentAlignment(logout, Alignment.BOTTOM_RIGHT);
 
+        
+        
         TabSheet tabsheet = new TabSheet();
         tabsheet.addTab(new SearchTab().searchTab(), "Suchen");
 
+        /**
+         * Validierung welche Funktion angemeldet ist und hinzufügen jeweiliger Komponenten.
+         */
         if (VaadinSession.getCurrent().getAttribute("userfunction").toString().equals("Admin") ) {
             tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
         }
+        
+        /*
+        * Abfüllen der erstellten Komponenten in die Layouts
+        */
         tabsheet.addTab(new PrintTab().printLayout, "Drucken");
-
-        // Hier werden die Erstellten Kompnenten eingefügt.
         rootLayout.addComponents(titleLayout, tabsheet);
-
-        // Setzt den zuvor eingefügten Content
         setContent(rootLayout);
+    }
+    
+    @WebServlet(value = "/*", asyncSupported = true)
+    @VaadinServletConfiguration(productionMode = false, ui = MyUI.class)
+    public static class Servlet extends VaadinServlet {
     }
 }

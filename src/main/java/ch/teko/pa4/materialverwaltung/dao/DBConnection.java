@@ -12,8 +12,10 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 /**
- *
- * @author tbaec
+ *Baut die Verbindung zur Datenbank auf.
+ * DB Name : Materialverwaltung. 
+ * MongoDB
+ * @author t.baechler, ch.grossmann
  */
 public class DBConnection {
     

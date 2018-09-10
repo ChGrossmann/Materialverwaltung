@@ -5,7 +5,6 @@
  */
 package ch.teko.pa4.materialverwaltung.ui;
 
-
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.navigator.View;
@@ -23,10 +22,15 @@ import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * Hiermit wird die LoginPage definiert mit der Eingabemaske.
+ * @author t.baechler, ch.grossmann
+ */
 public class LoginPage extends VerticalLayout implements View {
 
     private static final long serialVersionUID = 1L;
     public static final String NAME = "";
+
     
     public LoginPage() {
         Panel panel = new Panel("Login");
@@ -49,18 +53,17 @@ public class LoginPage extends VerticalLayout implements View {
             }
 
         });
-        
-        ShortcutListener shortcut = new ShortcutListener("Login", ShortcutAction.KeyCode.ENTER, null) {
-		@Override
-		public void handleAction(Object sender, Object target) {
-			loginAction(username.getValue(), password.getValue());
 
-		}
-	};
-        
-       login.addShortcutListener(shortcut);
-        
-        
+        ShortcutListener shortcut = new ShortcutListener("Login", ShortcutAction.KeyCode.ENTER, null) {
+            @Override
+            public void handleAction(Object sender, Object target) {
+                loginAction(username.getValue(), password.getValue());
+
+            }
+        };
+
+        login.addShortcutListener(shortcut);
+
         content.addComponent(login);
         content.setSizeUndefined();
         content.setMargin(true);
@@ -73,18 +76,22 @@ public class LoginPage extends VerticalLayout implements View {
     public void enter(ViewChangeEvent event) {
 
     }
-    
-    private void loginAction(String username, String password){
-        
-        
+
+    /**
+     * Hier wird der aktuellen Sitzung die Benutzerfunktion zugeteilt.
+     * @param username
+     * @param password 
+     */
+    private void loginAction(String username, String password) {
+
         if (MyUI.AUTH.authenticate(username, password)) {
-                    VaadinSession.getCurrent().setAttribute("user", username);
-                    VaadinSession.getCurrent().setAttribute("userfunction", MyUI.AUTH.getUserfunction());
-                    Page.getCurrent().setUriFragment("");
-                    Page.getCurrent().reload();
-                } else {
-                    Notification.show("Invalid credentials", Notification.Type.ERROR_MESSAGE);
-                }
+            VaadinSession.getCurrent().setAttribute("user", username);
+            VaadinSession.getCurrent().setAttribute("userfunction", MyUI.AUTH.getUserfunction());
+            Page.getCurrent().setUriFragment("");
+            Page.getCurrent().reload();
+        } else {
+            Notification.show("Ungültige Eingabe", Notification.Type.ERROR_MESSAGE);
+        }
     }
 
 }

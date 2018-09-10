@@ -5,11 +5,9 @@
  */
 package ch.teko.pa4.materialverwaltung.beans;
 
-import org.bson.types.ObjectId;
-
 /**
- *
- * @author tbaec
+ *Vorbereitetes Bean für unsere Artikel in der Datenbank.
+ * @author t.baechler, ch.grossmann
  */
 public class Article {
 
@@ -34,9 +32,9 @@ public class Article {
 
     public Article() {
     }
-    
+
     public Article(String id) {
-        
+
         this.id = id;
     }
 

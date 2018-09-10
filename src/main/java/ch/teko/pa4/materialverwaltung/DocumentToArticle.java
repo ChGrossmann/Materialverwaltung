@@ -9,13 +9,18 @@ import ch.teko.pa4.materialverwaltung.beans.Article;
 import org.bson.Document;
 
 /**
- *Hier wird aus einem Document ein Artikel Bean gemacht.
- * @author ch.grossmann
+ *Hier wird aus einem Document ein Artikel Bean abgefüllt.
+ * @author ch.grossmann, t.baechler
  */
 public class DocumentToArticle {
 
+    /**
+     * Liest ein Document aus und füllt es in en Artikel Bean ab.
+     * @param doc
+     * @return 
+     */
     public Article documentToAticle(Document doc) {
-        //Bean Bill abfüllen
+        
         Article article = new Article();
 
         article.setId(doc.get("_id").toString());

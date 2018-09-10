@@ -5,6 +5,11 @@
  */
 package ch.teko.pa4.materialverwaltung.ui;
 
+/**
+ * Die Autentifizierung für die Validierung der Berechtigungen im Programm.
+ * Die Benutzer sind fest vorgegeben. Für die produktive Verwendung muss eine Autentifizierung via Datenbank und Registrierung hinzugefügt werden.
+ * @author ch.grossmann, t.baechler
+ */
 public class Authentication {
 
     private String username;
@@ -60,6 +65,12 @@ public class Authentication {
         this.passwortAdmin = passwortAdmin;
     }
 
+    /**
+     * Setzt die Userfunktion anhand der Eingaben.
+     * @param username
+     * @param password
+     * @return 
+     */
     public Boolean authenticate(String username, String password) {
         if ((username.equals(getUsername()) && password.equals(getPassword())) || ((username.equals(getUsernameAdmin()) && password.equals(getPasswordAdmin())))) {
             if (username.equals(getUsername())) {

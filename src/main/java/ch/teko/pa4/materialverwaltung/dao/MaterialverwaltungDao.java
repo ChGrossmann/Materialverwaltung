@@ -16,8 +16,8 @@ import org.bson.types.ObjectId;
 import com.mongodb.client.result.DeleteResult;
 
 /**
- *
- * @author ch.grossmann
+ *Methoden für den Datentransfer zwischen Applikation und Datenbank.
+ * @author ch.grossmann, t.baechler
  */
 public class MaterialverwaltungDao {
 
@@ -27,6 +27,11 @@ public class MaterialverwaltungDao {
     ArticleToDocument AtD = new ArticleToDocument();
     List<Article> searchArticle = new ArrayList<>();
 
+    /**
+     * Hiermit wird ein Artikel Bean in ein Document umgewandelt um es in die DB einzulesen.
+     * @param article
+     * @return 
+     */
     public Document addArticle(Article article) {
 
         conn.connection("Artikel");
@@ -40,6 +45,11 @@ public class MaterialverwaltungDao {
         return newArticle;
     }
 
+    /**
+     * Hiermit wird die Datenbank durchsucht ohne Parameter.
+     * Es werden alle gefundenen Einträge in ein Artikel Bean abgefüllt und in einer Liste zurück gegeben.
+     * @return 
+     */
     public List<Article> searchArticle() {
 
         conn.connection("Artikel");
@@ -57,6 +67,12 @@ public class MaterialverwaltungDao {
         return searchArticle;
     }
 
+    /**
+     * Hiermit wird die Datenbank durchsucht mit Parameter.
+     * Es werden alle gefundenen Einträge in ein Artikel Bean abgefüllt und in einer Liste zurück gegeben.
+     * @param artikel
+     * @return 
+     */
     public List<Article> searchArticle(Document artikel) {
 
         conn.connection("Artikel");
@@ -73,16 +89,32 @@ public class MaterialverwaltungDao {
         return searchArticle;
     }
 
+    /**
+     * Hiermit wird via übergebene id des Eintrags in der DB den entsprechenden Eintrag gelöscht.
+     * Es wird ein Zähler zurückgegeben ob etwas gelöscht wurde.
+     * @param id
+     * @return 
+     */
     public long deleteArticle(String id) {
 
         conn.connection("Artikel");
 
+        /**
+         * Gibt die Anzahl an gelöschten Einträgen wieder.
+         */
         DeleteResult delCount = conn.mdbCollection.deleteOne(new Document("_id", new ObjectId(id)));
 
         return delCount.getDeletedCount();
 
     }
 
+    /**
+     * Hiermit wird der alte Artikel gelöscht und ein neuer an seiner Stelle in die Datenbank eingelesen.
+     * Der alte Artikel wird mit Hilfe der id in der Datenbank gesucht und gelöscht.
+     * Der neue Artikel wird in ein Document umgewandelt un in die DB geschrieben.
+     * @param oldArticle
+     * @param newArticle 
+     */
     public void editArticle(Article oldArticle, Article newArticle) {
 
         conn.connection("Artikel");

@@ -9,11 +9,17 @@ import ch.teko.pa4.materialverwaltung.beans.Article;
 import org.bson.Document;
 
 /**
- *
- * @author ch.grossmann
+ * Hier wird ein Artikel in ein Document umgewandelt um es in die mongodb zu schreiben.
+ * 
+ * @author ch.grossmann, t.baechler
  */
 public class ArticleToDocument {
     
+    /**
+     * Erstellt ein Document aus dem übergebenen Artikel Objekt.
+     * @param newArticle
+     * @return 
+     */
     public Document articleToDocument(Article newArticle){
         
         Document newArticleDoc = new Document();

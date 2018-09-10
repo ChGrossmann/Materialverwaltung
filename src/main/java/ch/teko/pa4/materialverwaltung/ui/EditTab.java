@@ -20,12 +20,37 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 /**
- *
- * @author ch.grossmann
+ * Hier werden die Elemente für das Ändern eines Artikels erstellt.
+ * Alle Textfelder und der Ändern Button werden erstellt und in den entsprechenden Layouts bereitgestellt.
+ * Die alten übergebenen Werte sind bereits in die Textfelder abgefüllt.
+ * Die alte id wird zur Suche vorab gespeichert.
+ * @author ch.grossmann, t.baechler
  */
 public class EditTab {
 
 
+    /**
+     * Alle übergebenen Werte des alten Artikels.
+     * @param id
+     * @param setBahn
+     * @param setLinie
+     * @param setStation
+     * @param setSystem1
+     * @param setSystem2
+     * @param setSystem3
+     * @param setBezeichnung
+     * @param setTyp
+     * @param setBeschreibung
+     * @param setArtikelNr
+     * @param setAnzahl
+     * @param setGestell
+     * @param setSchiene
+     * @param setSchrank
+     * @param setTablar
+     * @param setBox
+     * @param setBemerkung
+     * @return 
+     */
     public Component editTab(String id, String setBahn, String setLinie, String setStation,
             String setSystem1, String setSystem2, String setSystem3, String setBezeichnung,
             String setTyp, String setBeschreibung, String setArtikelNr, int setAnzahl,
@@ -253,6 +278,10 @@ public class EditTab {
 
         final HorizontalLayout submitLayout = new HorizontalLayout();
 
+        /**
+         * Mit dem Button werden alle Values der Textfelder aufgenommen und in ein Artikel Bean gespeichert und an die editArticle Methode übergeben.
+         * Das Objekt mit der alten id wird ebenfalls übergeben um es zu suchen und zu löschen.
+         */
         Button editBtn = new Button("Ändern", (addArticleEvent) -> {
 
             Article newArticle = new Article();
