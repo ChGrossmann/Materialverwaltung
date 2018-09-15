@@ -82,8 +82,8 @@ public class MyUI extends UI {
             tabsheet.addTab(new AddTab().addTab(), "Hinzufügen");
         }
         
-        /*
-        * Abfüllen der erstellten Komponenten in die Layouts
+        /**
+        * Abfüllen der erstellten Komponenten in die Layouts.
         */
         tabsheet.addTab(new PrintTab().printTab(), "Drucken");
         rootLayout.addComponents(titleLayout, tabsheet);
