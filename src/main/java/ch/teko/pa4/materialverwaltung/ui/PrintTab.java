@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Hier werden die Elemente für das Drucken einer gewünschten Station bereitgestellt.
  * @author ch.grossmann
  */
 public class PrintTab {
@@ -66,6 +66,11 @@ public class PrintTab {
         return printLayout;
     }
 
+    /**
+     * Die printAction wird durch den Drucken Button ausgelöst und nimmt den 
+     * übergebenen Wert vom Textfeld und sucht die gewünschte Station.
+     * Die gefundenen Daten werden als PDF Datei dargestellt zur weiteren verwendung.
+     */
     private void printAction() {
 
         MaterialverwaltungDao dao = new MaterialverwaltungDao();
