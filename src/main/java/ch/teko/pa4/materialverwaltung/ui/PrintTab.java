@@ -23,7 +23,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.server.Page;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import java.awt.Desktop;
@@ -45,10 +44,6 @@ public class PrintTab {
 
 
     public Component printTab() {
-
-        
-        
-        
 
         Button printBtn = new Button("Drucken", (printEvent) -> {
 
