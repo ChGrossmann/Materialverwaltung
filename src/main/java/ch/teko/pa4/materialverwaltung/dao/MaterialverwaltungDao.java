@@ -36,9 +36,7 @@ public class MaterialverwaltungDao {
 
         conn.connection("Artikel");
 
-        Document newArticle = AtD.articleToDocument(article);;
-
-        
+        Document newArticle = AtD.articleToDocument(article);
 
         conn.mdbCollection.insertOne(newArticle);
 

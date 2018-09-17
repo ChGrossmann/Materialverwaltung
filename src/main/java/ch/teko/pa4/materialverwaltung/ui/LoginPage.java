@@ -8,7 +8,6 @@ package ch.teko.pa4.materialverwaltung.ui;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Alignment;
@@ -72,10 +71,6 @@ public class LoginPage extends VerticalLayout implements View {
 
     }
 
-    @Override
-    public void enter(ViewChangeEvent event) {
-
-    }
 
     /**
      * Hier wird der aktuellen Sitzung die Benutzerfunktion zugeteilt.
