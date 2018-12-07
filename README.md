@@ -3,7 +3,6 @@ WebbasierteMaterialverwaltung
 
 Projektarbeit des 4.Semesters von
 
-Thomas Baechler
 Christoph Grossmann
 
 Die verschiedenen Login lauten:
